@@ -114,6 +114,8 @@ try {
     echo "このファイルはセキュリティのため、使い終わったら直ちに削除してください。";
 
 } catch (Exception $e) {
-    $pdo->rollBack();
-    echo "<b>ERROR:</b> " . $e->getMessage();
+    if (isset($pdo) && $pdo !== null) {
+        try { $pdo->rollBack(); } catch(Exception $ex) {}
+    }
+    echo "<b>ERROR:</b> " . htmlspecialchars($e->getMessage()) . "<br>Line: " . $e->getLine();
 }
