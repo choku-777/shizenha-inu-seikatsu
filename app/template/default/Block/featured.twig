@@ -1,0 +1,27 @@
+{#
+    看板商品セクション (Featured Product)
+#}
+<section class="featured-section">
+    <div class="container">
+        <div class="featured-content">
+            <div class="featured-image-wrapper">
+                <div class="featured-image">
+                    <img src="{{ asset('assets/img/featured_product.jpg', 'user_data') }}" alt="馬肉自然づくり" style="width: 100%; display: block; background-color: #E8DCC8; min-height: 400px;">
+                </div>
+            </div>
+            <div class="featured-info">
+                <span class="featured-badge">おすすめ No.1</span>
+                <h3 class="featured-title">馬肉自然づくり</h3>
+                <p class="featured-description">
+                    お客様の声から生まれた無添加ドライフード。当店自慢の馬肉と16種類の国産食材を使用し、愛犬の健康をサポートします。
+                </p>
+                <ul class="featured-features">
+                    <li>人が食べても美味しいヒューマングレード品質</li>
+                    <li>保存料・着色料・香料などの添加物一切不使用</li>
+                    <li>高タンパク・低カロリーな新鮮馬肉をたっぷり使用</li>
+                </ul>
+                <a href="{{ url('product_detail', {'id': 1}) }}" class="btn btn-primary">詳しくみる</a>
+            </div>
+        </div>
+    </div>
+</section>

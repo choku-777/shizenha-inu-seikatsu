@@ -1,0 +1,202 @@
+/* 自然派いぬ生活 共通デザインシステム */
+
+/* =========================================================================
+   変数の定義 (Design Tokens)
+   ========================================================================= */
+:root {
+  /* Colors */
+  --color-primary: #C8963E; /* マスタードゴールド（アクセント） */
+  --color-primary-light: #DFB263;
+  --color-primary-dark: #A67520;
+  --color-bg: #FBF8F3; /* アイボリー（ベース背景） */
+  --color-bg-alt: #F0E8DA; /* ベージュ（交互背景） */
+  --color-text: #3D2B1F; /* ダークブラウン（基本テキスト） */
+  --color-text-light: #7A6B5D; /* 薄いブラウン（サブテキスト） */
+  --color-white: #FFFFFF;
+  --color-border: #E8DCC8;
+
+  /* Typography */
+  --font-heading: 'Noto Serif JP', serif;
+  --font-body: 'Noto Sans JP', sans-serif;
+  
+  /* Layout */
+  --container-width: 1200px;
+  --section-padding: 80px 0;
+  --section-padding-sp: 40px 0;
+}
+
+/* =========================================================================
+   ベーススタイル
+   ========================================================================= */
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================================
+   ユーティリティクラス
+   ========================================================================= */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: var(--section-padding);
+}
+
+.section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--section-padding-sp);
+  }
+}
+
+/* =========================================================================
+   見出しスタイル
+   ========================================================================= */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-primary);
+  margin: 15px auto 0;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+}
+
+/* =========================================================================
+   ボタンスタイル
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-text); /* ダークブラウンのボタン */
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-text);
+  color: var(--color-white);
+}
+
+/* =========================================================================
+   カードスタイル
+   ========================================================================= */
+.card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--color-border);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================================
+   レイアウトコンポーネント
+   ========================================================================= */
+.grid {
+  display: grid;
+  gap: 30px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 992px) {
+  .grid-3, .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Google Fontsの読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');

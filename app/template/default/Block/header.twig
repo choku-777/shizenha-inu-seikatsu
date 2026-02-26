@@ -1,0 +1,73 @@
+{#
+    カスタムヘッダーブロック
+#}
+<link rel="stylesheet" href="{{ asset('assets/css/header.css', 'user_data') }}">
+<header class="custom-header">
+    {# ユーティリティバー (PCのみ) #}
+    <div class="header-utility">
+        <div class="container header-utility-inner">
+            <a href="{{ url('mypage') }}" class="utility-item">
+                <i class="fas fa-user"></i> マイページ
+            </a>
+            <a href="{{ url('cart') }}" class="utility-item">
+                <i class="fas fa-shopping-cart"></i> カート
+            </a>
+            <a href="#" class="utility-item">
+                <i class="fas fa-heart"></i> お気に入り
+            </a>
+            <div class="utility-item">
+                <i class="fas fa-phone"></i>
+                <span class="utility-contact">無料相談</span>
+                <span class="utility-contact-tel">0120-000-000</span>
+                <span>(受付時間 9:00-18:00 土日祝休)</span>
+            </div>
+        </div>
+    </div>
+
+    {# メインヘッダー #}
+    <div class="header-main">
+        <div class="container header-main-inner">
+            {# ロゴ #}
+            <div class="header-logo">
+                <a href="{{ url('homepage') }}">
+                    <h1><img src="{{ asset('assets/img/logo.png', 'user_data') }}" alt="{{ BaseInfo.shop_name }}"></h1>
+                </a>
+            </div>
+
+            {# グローバルナビゲーション (PC) #}
+            <nav class="header-nav">
+                <ul>
+                    <li class="nav-item-dropdown">
+                        <a href="{{ url('product_list') }}">商品を探す <i class="fas fa-chevron-down fa-xs"></i></a>
+                        <ul class="nav-dropdown-menu">
+                            <li><a href="{{ url('product_list') }}">すべて</a></li>
+                            <li><a href="{{ url('product_list') }}?category_id=1">おやつ</a></li>
+                            <li><a href="{{ url('product_list') }}?category_id=2">トッピング</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="#">ブランドについて <i class="fas fa-chevron-down fa-xs"></i></a>
+                        <ul class="nav-dropdown-menu">
+                            <li><a href="#">コンセプト</a></li>
+                            <li><a href="#">3つの約束</a></li>
+                            <li><a href="#">安心へのこだわり</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">お客様の声</a></li>
+                    <li><a href="#">よくあるご質問</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                </ul>
+            </nav>
+
+            {# トライアルボタン / ハンバーガーメニュー #}
+            <div class="header-actions">
+                <a href="{{ url('product_detail', {'id': 1}) }}" class="header-trial-btn">
+                    <i class="fas fa-gift"></i> 初回限定トライアル
+                </a>
+                <button type="button" class="mobile-menu-toggle" aria-label="メニューを開く">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>

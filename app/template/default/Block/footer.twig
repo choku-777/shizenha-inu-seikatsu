@@ -1,0 +1,67 @@
+{#
+    カスタムフッターブロック
+#}
+<link rel="stylesheet" href="{{ asset('assets/css/footer.css', 'user_data') }}">
+<footer class="custom-footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="footer-col">
+                <span class="footer-col-title">商品一覧</span>
+                <ul class="footer-menu">
+                    <li><a href="{{ url('product_list') }}">メインフード</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=1">おやつ</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=2">トッピング</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=3">手作りフード</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=4">生馬肉</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <span class="footer-col-title">私たちの想い</span>
+                <ul class="footer-menu">
+                    <li><a href="#">コンセプト</a></li>
+                    <li><a href="#">3つの約束</a></li>
+                    <li><a href="#">安心へのこだわり</a></li>
+                    <li><a href="#">商品開発ストーリー</a></li>
+                    <li><a href="#">馬肉の魅力</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <span class="footer-col-title">健康いぬだより</span>
+                <ul class="footer-menu">
+                    <li><a href="#">ワンちゃんとの暮らし方</a></li>
+                    <li><a href="#">ワンちゃんを迎える前に</a></li>
+                    <li><a href="#">ワンちゃんを理解する</a></li>
+                    <li><a href="#">犬種について知る</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <span class="footer-col-title">マイページ</span>
+                <ul class="footer-menu">
+                    <li><a href="{{ url('mypage') }}">ログイン</a></li>
+                    <li><a href="{{ url('mypage_change') }}">会員情報変更</a></li>
+                    <li><a href="{{ url('mypage') }}">購入履歴</a></li>
+                    <li><a href="{{ url('mypage_favorite') }}">お気に入り商品</a></li>
+                    <li><a href="{{ url('mypage') }}">メルマガ登録</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <span class="footer-col-title">当サイトについて</span>
+                <ul class="footer-menu">
+                    <li><a href="{{ url('help_guide') }}">お買い物の流れ</a></li>
+                    <li><a href="{{ url('help_tradelaw') }}">特定商取引法に基づく表記</a></li>
+                    <li><a href="{{ url('help_agreement') }}">利用規約</a></li>
+                    <li><a href="{{ url('help_privacy') }}">プライバシーポリシー</a></li>
+                    <li><a href="{{ url('contact') }}">お問い合わせフォーム</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; {{ 'now'|date('Y') }} {{ BaseInfo.shop_name }} All rights reserved.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,38 @@
+{#
+    お知らせセクション
+#}
+{% set NewsList = repository('Eccube\\Entity\\News').getList() %}
+<section class="news-section">
+    <div class="container">
+        <h2 class="section-title">お知らせ</h2>
+        
+        <div class="news-list">
+            {% for News in NewsList %}
+                {# 最新の5件のみ表示 #}
+                {% if loop.index <= 5 %}
+                    <div class="news-item">
+                        <div class="news-date">{{ News.publish_date|date('Y.m.d') }}</div>
+                        <div class="news-category">ショップ</div>
+                        <div class="news-title">
+                            {% if News.url %}
+                                <a href="{{ News.url }}" {% if News.link_method == '1' %}target="_blank"{% endif %}>
+                                    {{ News.title }}
+                                </a>
+                            {% else %}
+                                <span>{{ News.title }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="news-item">
+                    <div class="news-title" style="text-align: center; color: var(--color-text-light);">現在お知らせはありません。</div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#" class="btn btn-primary" style="background-color: var(--color-primary);">お知らせ一覧をみる</a>
+        </div>
+    </div>
+</section>

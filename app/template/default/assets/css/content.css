@@ -1,0 +1,207 @@
+/* =========================================================================
+   お客様の声 (Reviews)
+   ========================================================================= */
+.reviews-section {
+    padding: var(--section-padding);
+    background-color: var(--color-bg);
+}
+
+.review-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.review-text::before {
+    content: '\f10d';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--color-primary);
+    opacity: 0.2;
+    font-size: 2rem;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.review-author {
+    font-weight: bold;
+    text-align: right;
+    color: var(--color-primary-dark);
+}
+
+/* =========================================================================
+   SNSセクション
+   ========================================================================= */
+.sns-section {
+    padding: var(--section-padding);
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+.sns-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.sns-item {
+    display: block;
+    position: relative;
+    padding-top: 100%;
+    /* 正方形 */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.sns-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.sns-item:hover img {
+    transform: scale(1.1);
+}
+
+/* =========================================================================
+   よくあるご質問 (FAQ)
+   ========================================================================= */
+.faq-section {
+    padding: var(--section-padding);
+    background-color: var(--color-bg-alt);
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.faq-question {
+    padding: 20px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::before {
+    content: 'Q';
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.faq-icon {
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    padding: 0 25px 20px 48px;
+    display: none;
+    /* 初期状態は非表示（JSで開閉） */
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
+/* =========================================================================
+   お知らせ (News)
+   ========================================================================= */
+.news-section {
+    padding: var(--section-padding);
+    background-color: var(--color-bg);
+}
+
+.news-list {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px dashed var(--color-border);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    font-weight: bold;
+    color: var(--color-text-light);
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.news-category {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.news-title {
+    flex: 1;
+}
+
+.news-title a {
+    color: var(--color-text);
+}
+
+.news-title a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .sns-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .news-item {
+        flex-direction: column;
+    }
+
+    .news-date,
+    .news-category {
+        margin-bottom: 5px;
+    }
+}

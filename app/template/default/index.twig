@@ -1,0 +1,53 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+    {# 1. ヘッダーブロックは default_frame.twig で読み込まれるか、管理画面のブロック配置で行う想定ですが、
+       今回の提案では全てのパーツをトップページ用に手作りしたため、直接インクルードします #}
+    {{ include('Block/header.twig') }}
+
+    {# 2. メインビジュアル (ヒーローブロック) #}
+    {{ include('Block/hero.twig') }}
+
+    {# 3. 看板商品セクション #}
+    {{ include('Block/featured.twig') }}
+
+    {# 4. 商品カテゴリ一覧 #}
+    {{ include('Block/categories.twig') }}
+
+    {# 5. 馬肉の魅力セクション #}
+    {{ include('Block/horsemeat.twig') }}
+
+    {# 6. ブランドコンセプト #}
+    {{ include('Block/concept.twig') }}
+
+    {# 7. 3つの約束 #}
+    {{ include('Block/promises.twig') }}
+
+    {# 8. お客様の声 #}
+    {{ include('Block/reviews.twig') }}
+
+    {# 9. SNS セクション #}
+    {{ include('Block/sns.twig') }}
+
+    {# 10. FAQ セクション #}
+    {{ include('Block/faq.twig') }}
+
+    {# 11. お知らせセクション #}
+    {{ include('Block/news.twig') }}
+
+    {# 12. お問い合わせCTAセクション #}
+    {{ include('Block/contact_cta.twig') }}
+
+    {# 13. フッターブロック #}
+    {{ include('Block/footer.twig') }}
+{% endblock %}

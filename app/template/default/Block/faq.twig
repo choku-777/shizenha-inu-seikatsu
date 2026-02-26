@@ -1,0 +1,67 @@
+{#
+    FAQセクション
+#}
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">よくあるご質問</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">
+                    フードが足りなくなったので、定期便を最短で届けてもらえますか？
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    はい、マイページからお届け日の変更が可能です。最短でのお届けをご希望の場合は、お電話またはお問い合わせフォームよりご連絡ください。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    保存方法はどうすればいいのでしょうか？
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    直射日光、高温多湿を避けて常温で保存してください。開封後は空気を抜いて密閉し、冷暗所で保管の上、1ヶ月を目安に使い切ることをおすすめします。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    トッピングはどのように与えたら良いのでしょうか？
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    いつものメインフードに、1日の給与量の1〜2割を目安にトッピングして与えてください。食欲がない時や、ご褒美としてもおすすめです。
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#" class="btn btn-primary" style="background-color: var(--color-primary);">もっとみる</a>
+        </div>
+    </div>
+    
+    <script>
+        // FAQアコーディオンの開閉処理
+        document.addEventListener('DOMContentLoaded', function() {
+            var questions = document.querySelectorAll('.faq-question');
+            questions.forEach(function(q) {
+                q.addEventListener('click', function() {
+                    var answer = this.nextElementSibling;
+                    var icon = this.querySelector('.faq-icon');
+                    
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        answer.style.display = 'block';
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        });
+    </script>
+</section>
