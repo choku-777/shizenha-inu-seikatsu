@@ -29,7 +29,7 @@ jobs:
           outputs: type=docker,dest=/tmp/ec-cube.tar
 
       - name: Upload image
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ec-cube
           path: /tmp/ec-cube.tar
@@ -226,14 +226,14 @@ jobs:
 
       - name: Upload report
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: zap-${{ matrix.target }}-report
           path: /tmp/report
 
       - name: Upload alerts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: zap-${{ matrix.target }}-report
           path: /tmp/alerts.json
@@ -254,7 +254,7 @@ jobs:
           jq -s add **/alerts.json > all_alerts.json
         working-directory: artifacts
       - name: Upload alerts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: all_alerts
           path: artifacts/all_alerts.json
