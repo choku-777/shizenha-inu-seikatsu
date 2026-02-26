@@ -4,10 +4,10 @@
  * 実行完了後は直ちに削除してください。
  */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 // 環境変数の読み込み等初期化
-$env = new \Dotenv\Dotenv(__DIR__.'/../');
+$env = new \Dotenv\Dotenv(__DIR__);
 $env->load();
 
 // DB接続情報
