@@ -1,0 +1,196 @@
+/* =========================================================================
+   ヘッダー (Header)
+   ========================================================================= */
+.custom-header {
+    background-color: var(--color-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 100;
+}
+
+/* トップユーティリティバー */
+.header-utility {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 8px 0;
+    font-size: 0.85rem;
+}
+
+.header-utility-inner {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.utility-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-text-light);
+}
+
+.utility-item i {
+    color: var(--color-primary);
+}
+
+.utility-contact {
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.utility-contact-tel {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-left: 5px;
+}
+
+/* メインヘッダー（ロゴ＆ナビゲーション） */
+.header-main {
+    padding: 15px 0;
+}
+
+.header-main-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* 最上位ナビゲーション */
+.header-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.header-nav a {
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    display: block;
+    position: relative;
+}
+
+.header-nav a:hover {
+    color: var(--color-primary);
+    opacity: 1;
+}
+
+.header-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.header-nav a:hover::after {
+    width: 100%;
+}
+
+/* ドロップダウンメニューの基本スタイル */
+.nav-item-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background-color: var(--color-white);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-width: 200px;
+    padding: 15px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.nav-item-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-menu li {
+    padding: 0;
+}
+
+.nav-dropdown-menu a {
+    padding: 10px 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.nav-dropdown-menu a::after {
+    display: none;
+}
+
+.nav-dropdown-menu a:hover {
+    background-color: var(--color-bg);
+}
+
+/* トライアルバナー（右上） */
+.header-trial-btn {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-trial-btn:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    opacity: 1;
+}
+
+/* モバイル用ハンバーガーメニュー (デフォルト非表示) */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 992px) {
+    .header-utility {
+        display: none;
+        /* スマホではユーティリティバー非表示 */
+    }
+
+    .header-nav {
+        display: none;
+        /* PCナビゲーション非表示 */
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        /* ハンバーガー表示 */
+    }
+
+    .header-trial-btn {
+        display: none;
+    }
+}
