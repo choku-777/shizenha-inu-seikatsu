@@ -7,8 +7,13 @@
 require __DIR__.'/vendor/autoload.php';
 
 // 環境変数の読み込み等初期化
-$env = new \Dotenv\Dotenv(__DIR__);
-$env->load();
+if (method_exists('\Dotenv\Dotenv', 'createUnsafeMutable')) {
+    (\Dotenv\Dotenv::createUnsafeMutable(__DIR__))->load();
+} else {
+    // 古いバージョンの場合
+    $env = new \Dotenv\Dotenv(__DIR__);
+    $env->load();
+}
 
 // DB接続情報
 $dbUrl = getenv('DATABASE_URL');
