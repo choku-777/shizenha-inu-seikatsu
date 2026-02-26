@@ -26,4 +26,4 @@ jobs:
         # 変更されたファイルだけを同期するrsyncコマンド
         # EC-CUBEの公開パスに合わせて展開先（DEST_DIR）を指定
         run: |
-          rsync -avz --exclude '.git' --exclude '.github' --exclude 'var/' --exclude 'vendor/' --exclude 'node_modules/' -e "ssh -p ${{ secrets.SSH_PORT }}" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEST_DIR }}/
+          rsync -avz --exclude '.git' --exclude '.github' --exclude 'var/' --exclude 'vendor/' --exclude 'node_modules/' -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEST_DIR }}/
