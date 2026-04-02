@@ -8,6 +8,7 @@ node_modules
 !/var/.htaccess
 /app/Plugin/*
 !/app/Plugin/.gitkeep
+!/app/Plugin/EntityForm
 /app/PluginData/*
 !/app/PluginData/.gitkeep
 /app/template/*
