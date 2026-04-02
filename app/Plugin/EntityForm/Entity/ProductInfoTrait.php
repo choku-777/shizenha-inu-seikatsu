@@ -5,6 +5,8 @@ namespace Plugin\EntityForm\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Eccube\Annotation\EntityExtension;
 use Eccube\Annotation\FormAppend;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * @EntityExtension("Eccube\Entity\Product")
@@ -13,31 +15,51 @@ trait ProductInfoTrait
 {
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @FormAppend(auto_render=true, form_theme="EntityForm/Form/product_info.twig")
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextareaType",
+     *     options={"required": false, "label": "原材料", "attr": {"rows": 3}}
+     * )
      */
     public $ingredients;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @FormAppend(auto_render=true, form_theme="EntityForm/Form/product_info.twig")
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextareaType",
+     *     options={"required": false, "label": "成分値", "attr": {"rows": 3}}
+     * )
      */
     public $nutrition;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @FormAppend(auto_render=true, form_theme="EntityForm/Form/product_info.twig")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextType",
+     *     options={"required": false, "label": "内容量"}
+     * )
      */
     public $capacity;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @FormAppend(auto_render=true, form_theme="EntityForm/Form/product_info.twig")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextType",
+     *     options={"required": false, "label": "賞味期限"}
+     * )
      */
     public $expiry;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @FormAppend(auto_render=true, form_theme="EntityForm/Form/product_info.twig")
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextareaType",
+     *     options={"required": false, "label": "保存方法", "attr": {"rows": 3}}
+     * )
      */
     public $storage;
 }
