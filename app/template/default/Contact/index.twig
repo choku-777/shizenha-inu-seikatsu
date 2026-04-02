@@ -1,0 +1,119 @@
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% set body_class = 'contact_page' %}
+
+{% block javascript %}
+    <script src="//yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+{% endblock javascript %}
+
+{% block main %}
+
+<div class="contact-hero-wrap">
+    <div class="contact-card">
+        <h1 class="contact-card__title">お問い合わせ</h1>
+        <p class="contact-card__lead">内容によっては回答をさしあげるのにお時間をいただくこともございます。<br>また、休業日は翌営業日以降の対応となりますのでご了承ください。</p>
+
+        <form method="post" action="{{ url('contact') }}" class="h-adr contact-form" novalidate>
+            <span class="p-country-name" style="display:none;">Japan</span>
+            {{ form_widget(form._token) }}
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">お名前 <span class="contact-form__required">必須</span></label>
+                <div class="ec-halfInput{{ has_errors(form.name.name01, form.name.name02) ? ' error' }}">
+                    {{ form_widget(form.name.name01, {'attr': { 'placeholder': '姓' }}) }}
+                    {{ form_widget(form.name.name02, {'attr': { 'placeholder': '名' }}) }}
+                    {{ form_errors(form.name.name01) }}
+                    {{ form_errors(form.name.name02) }}
+                </div>
+            </div>
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">お名前（カナ）</label>
+                <div class="ec-halfInput{{ has_errors(form.kana.kana01, form.kana.kana02) ? ' error' }}">
+                    {{ form_widget(form.kana.kana01, {'attr': { 'placeholder': 'セイ' }}) }}
+                    {{ form_widget(form.kana.kana02, {'attr': { 'placeholder': 'メイ' }}) }}
+                    {{ form_errors(form.kana.kana01) }}
+                    {{ form_errors(form.kana.kana02) }}
+                </div>
+            </div>
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">住所</label>
+                <div class="ec-zipInput{{ has_errors(form.postal_code) ? ' error' }}">
+                    <span>〒</span>
+                    {{ form_widget(form.postal_code) }}
+                    <div class="ec-zipInputHelp">
+                        <div class="ec-zipInputHelp__icon">
+                            <div class="ec-icon"><img src="{{ asset('assets/icon/question-white.svg') }}" alt=""></div>
+                        </div>
+                        <a href="https://www.post.japanpost.jp/zipcode/" target="_blank"><span>郵便番号検索</span></a>
+                    </div>
+                    {{ form_errors(form.postal_code) }}
+                </div>
+                <div class="ec-select{{ has_errors(form.address.pref) ? ' error' }}">
+                    {{ form_widget(form.address.pref) }}
+                    {{ form_errors(form.address.pref) }}
+                </div>
+                <div class="ec-input{{ has_errors(form.address.addr01) ? ' error' }}">
+                    {{ form_widget(form.address.addr01, { 'attr': { 'placeholder': '市区町村名（例：大阪市北区）' }}) }}
+                    {{ form_errors(form.address.addr01) }}
+                </div>
+                <div class="ec-input{{ has_errors(form.address.addr02) ? ' error' }}">
+                    {{ form_widget(form.address.addr02, { 'attr': { 'placeholder': '番地・ビル名（例：西梅田1丁目6-8）' }}) }}
+                    {{ form_errors(form.address.addr02) }}
+                </div>
+            </div>
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">電話番号</label>
+                <div class="ec-telInput{{ has_errors(form.phone_number) ? ' error' }}">
+                    {{ form_widget(form.phone_number, {'attr': { 'placeholder': '例：11122223333' }}) }}
+                    {{ form_errors(form.phone_number) }}
+                </div>
+            </div>
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">メールアドレス <span class="contact-form__required">必須</span></label>
+                <div class="ec-input{{ has_errors(form.email) ? ' error' }}">
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+
+            <div class="contact-form__row">
+                <label class="contact-form__label">お問い合わせ内容 <span class="contact-form__required">必須</span></label>
+                <div class="ec-input{{ has_errors(form.contents) ? ' error' }}">
+                    {{ form_widget(form.contents) }}
+                    {{ form_errors(form.contents) }}
+                </div>
+                <p class="contact-form__note">ご注文に関するお問い合わせには、必ず「ご注文番号」をご記入くださいますようお願いいたします。</p>
+            </div>
+
+            {% for f in form|filter(f => f.vars.eccube_form_options.auto_render) %}
+                {% if f.vars.eccube_form_options.form_theme %}
+                    {% form_theme f f.vars.eccube_form_options.form_theme %}
+                    {{ form_row(f) }}
+                {% else %}
+                    <div class="contact-form__row">
+                        {% set label_class = f.vars.label_attr.class is defined ? f.vars.label_attr.class : '' %}
+                        <label class="contact-form__label">{{ form_label(f, f.vars.label, { 'label_attr': {'class': label_class ~ ' ec-label' }}) }}</label>
+                        <div class="{{ f.vars.eccube_form_options.style_class }}{{ has_errors(f) ? ' error' }}">
+                            {{ form_widget(f) }}
+                            {{ form_errors(f) }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="contact-form__submit">
+                <button type="submit" class="contact-btn" name="mode" value="confirm">送信する</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

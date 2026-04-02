@@ -41,6 +41,17 @@ node_modules
 .maintenance
 *.neon
 
+# Local database
+*.sqlite
+/app/config/eccube/
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Duplicate CSS (not served; use html/user_data/assets/css/ instead)
+/html/template/default/assets/css/
+
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml

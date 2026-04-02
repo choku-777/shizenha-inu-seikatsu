@@ -1,0 +1,77 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'guide_page' %}
+
+{% block main %}
+<div class="guide-wrap">
+    <h1 class="guide-title">お買い物の流れ</h1>
+    <p class="guide-lead">自然派いぬ生活へのご注文は、以下のステップで簡単にお手続きいただけます。</p>
+
+    <div class="guide-steps">
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">01</span>
+                <i class="guide-step__icon fas fa-search"></i>
+            </div>
+            <div class="guide-step__title">商品を選ぶ</div>
+            <div class="guide-step__text">商品一覧からお気に入りの商品を見つけ、「カートに入れる」ボタンを押してください。</div>
+        </div>
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">02</span>
+                <i class="guide-step__icon fas fa-shopping-cart"></i>
+            </div>
+            <div class="guide-step__title">カートを確認</div>
+            <div class="guide-step__text">カート内の商品・数量をご確認ください。変更がある場合はここで修正できます。</div>
+        </div>
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">03</span>
+                <i class="guide-step__icon fas fa-user"></i>
+            </div>
+            <div class="guide-step__title">会員登録 / ログイン</div>
+            <div class="guide-step__text">初めての方は会員登録をお願いします。2回目以降はメールアドレスとパスワードでログインできます。</div>
+        </div>
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">04</span>
+                <i class="guide-step__icon fas fa-credit-card"></i>
+            </div>
+            <div class="guide-step__title">お届け先 / お支払い</div>
+            <div class="guide-step__text">お届け先住所を入力し、お支払い方法（クレジットカード・代引き・銀行振込・PayPay）をお選びください。</div>
+        </div>
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">05</span>
+                <i class="guide-step__icon fas fa-clipboard-check"></i>
+            </div>
+            <div class="guide-step__title">ご注文内容の確認</div>
+            <div class="guide-step__text">ご注文内容を最終確認して「注文する」ボタンを押してください。確認メールが届きます。</div>
+        </div>
+
+        <div class="guide-step">
+            <div class="guide-step__header">
+                <span class="guide-step__number">06</span>
+                <i class="guide-step__icon fas fa-box-open"></i>
+            </div>
+            <div class="guide-step__title">商品のお届け</div>
+            <div class="guide-step__text">営業日の午前中に決済が完了したご注文は当日発送させていただきます。新鮮な自然素材をお手元までお届けします。</div>
+        </div>
+
+    </div>
+
+    <div class="guide-note">
+        <h2 class="guide-note__title"><i class="fas fa-info-circle"></i> ご注文に関するご案内</h2>
+        <ul class="guide-note__list">
+            <li>ご注文後、確認メールを <strong>support@shizenha-inu.life</strong> よりお送りします。</li>
+            <li>ご不明な点はお気軽に <a href="{{ url('contact') }}">お問い合わせフォーム</a> またはお電話（0274-20-1212）にてご連絡ください。</li>
+            <li>支払い方法の詳細は <a href="{{ url('help_tradelaw') }}">特定商取引法に基づく表記</a> をご確認ください。</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

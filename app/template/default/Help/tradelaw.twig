@@ -1,0 +1,19 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'tradelaw_page' %}
+
+{% block main %}
+<div class="tradelaw-wrap">
+    <h1 class="tradelaw-title">特定商取引法に基づく表記</h1>
+    <table class="tradelaw-table">
+        <tbody>
+            {% for tradelaw in tradelaws|filter(t => t.name and t.description) %}
+            <tr class="tradelaw-table__row">
+                <th class="tradelaw-table__th">{{ tradelaw.name }}</th>
+                <td class="tradelaw-table__td">{{ tradelaw.description|raw }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
