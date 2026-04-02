@@ -879,7 +879,7 @@
 
 /* ヒーロー＋カードのラッパー */
 .contact_page .contact-hero-wrap {
-    background-image: url('/html/user_data/assets/img/hero_bg.jpg');
+    background-image: url('/html/user_data/assets/img/hero_bg.webp');
     background-size: cover;
     background-position: center top;
     padding: 200px 20px 80px;
