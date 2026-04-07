@@ -129,6 +129,7 @@
 
 .nav-dropdown-menu li {
     padding: 0;
+    list-style: none;
 }
 
 .nav-dropdown-menu a {
