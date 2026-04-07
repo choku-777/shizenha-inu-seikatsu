@@ -61,8 +61,8 @@
     width: auto;
 }
 
-/* 最上位ナビゲーション */
-.header-nav ul {
+/* 最上位ナビゲーション（> で直接の子ulだけに適用） */
+.header-nav > ul {
     display: flex;
     list-style: none;
     margin: 0;
