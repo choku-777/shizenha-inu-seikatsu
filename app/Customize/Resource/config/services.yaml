@@ -1,0 +1,13 @@
+services:
+    # 商品登録価格を税込価格として扱うためのサービス上書き
+    # EC-CUBE標準のサービス定義をカスタマイズクラスに差し替える（lazy/public は維持）
+    Eccube\Service\TaxRuleService:
+        class: Customize\Service\TaxRuleServiceExtension
+        autowire: true
+        lazy: true
+        public: true
+
+    Eccube\Service\OrderHelper:
+        class: Customize\Service\OrderHelperExtension
+        autowire: true
+        public: true
