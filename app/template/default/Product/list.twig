@@ -111,13 +111,11 @@
     {% else %}
 
     {# ヒーロー #}
-    <section class="product-list-hero">
+    <section class="product-list-hero" style="background-image: url('{{ asset('assets/img/products_hero.webp', 'user_data') }}');">
+        <div class="product-list-hero__overlay"></div>
         <div class="container">
             <div class="product-list-hero__inner">
                 <h1 class="product-list-hero__title">商品一覧</h1>
-                <div class="product-list-hero__image">
-                    <img src="{{ asset('assets/img/products_hero.webp', 'user_data') }}" alt="" loading="eager" onerror="this.style.display='none'">
-                </div>
             </div>
         </div>
     </section>
