@@ -62,4 +62,34 @@ trait ProductInfoTrait
      * )
      */
     public $storage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextType",
+     *     options={"required": false, "label": "原産国"}
+     * )
+     */
+    public $origin_country;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextType",
+     *     options={"required": false, "label": "カロリー（例: 約287kcal / 100g）"}
+     * )
+     */
+    public $calorie;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @FormAppend(
+     *     auto_render=true,
+     *     type="\Symfony\Component\Form\Extension\Core\Type\TextareaType",
+     *     options={"required": false, "label": "給与量の目安", "attr": {"rows": 3}}
+     * )
+     */
+    public $feeding_amount;
 }
