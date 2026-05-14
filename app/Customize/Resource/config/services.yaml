@@ -11,3 +11,11 @@ services:
         class: Customize\Service\OrderHelperExtension
         autowire: true
         public: true
+
+    # 商品画像のWebP自動変換
+    Customize\EventListener\ProductImageWebpListener:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $logger: '@logger'
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
