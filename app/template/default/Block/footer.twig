@@ -8,11 +8,10 @@
             <div class="footer-col">
                 <span class="footer-col-title">商品一覧</span>
                 <ul class="footer-menu">
-                    <li><a href="{{ url('product_list') }}">メインフード</a></li>
-                    <li><a href="{{ url('product_list') }}?category_id=1">おやつ</a></li>
-                    <li><a href="{{ url('product_list') }}?category_id=2">トッピング</a></li>
-                    <li><a href="{{ url('product_list') }}?category_id=3">手作りフード</a></li>
-                    <li><a href="{{ url('product_list') }}?category_id=4">生馬肉</a></li>
+                    <li><a href="{{ url('product_list') }}">すべての商品</a></li>
+                    {% for Category in repository('Eccube\\Entity\\Category').getList() %}
+                        <li><a href="{{ url('product_list') }}?category_id={{ Category.id }}">{{ Category.name }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
             
