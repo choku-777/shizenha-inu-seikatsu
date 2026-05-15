@@ -1,6 +1,8 @@
 {#
-    FAQセクション
+    FAQセクション（一旦非表示）
+    後で内容を確定したら下のコメントを外す
 #}
+{#
 <section class="faq-section">
     <div class="container">
         <h2 class="section-title">よくあるご質問</h2>
@@ -14,7 +16,7 @@
                     はい、マイページからお届け日の変更が可能です。最短でのお届けをご希望の場合は、お電話またはお問い合わせフォームよりご連絡ください。
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <div class="faq-question">
                     保存方法はどうすればいいのでしょうか？
@@ -24,7 +26,7 @@
                     直射日光、高温多湿を避けて常温で保存してください。開封後は空気を抜いて密閉し、冷暗所で保管の上、1ヶ月を目安に使い切ることをおすすめします。
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <div class="faq-question">
                     トッピングはどのように与えたら良いのでしょうか？
@@ -39,7 +41,7 @@
             <a href="#" class="btn btn-primary" style="background-color: var(--color-primary);">もっとみる</a>
         </div>
     </div>
-    
+
     <script>
         // FAQアコーディオンの開閉処理
         document.addEventListener('DOMContentLoaded', function() {
@@ -48,7 +50,7 @@
                 q.addEventListener('click', function() {
                     var answer = this.nextElementSibling;
                     var icon = this.querySelector('.faq-icon');
-                    
+
                     if (answer.style.display === 'block') {
                         answer.style.display = 'none';
                         icon.classList.remove('fa-minus');
@@ -65,3 +67,4 @@
         });
     </script>
 </section>
+#}

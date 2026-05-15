@@ -146,6 +146,28 @@
     background-color: var(--color-bg);
 }
 
+/* 準備中メニュー */
+.nav-item-soon > span {
+    color: var(--color-text-light);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: not-allowed;
+}
+
+.nav-soon-badge {
+    display: inline-block;
+    background-color: #c0c0c0;
+    color: var(--color-white);
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 /* トライアルバナー（右上） */
 .header-trial-btn {
     background-color: var(--color-primary);

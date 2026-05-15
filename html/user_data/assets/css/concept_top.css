@@ -1,0 +1,327 @@
+/* =========================================================================
+   ブランドコンセプト（トップページ用）
+   ========================================================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+.concept-block {
+    color: var(--color-text);
+}
+
+/* アンカースクロール先の上オフセット */
+#about,
+#concept,
+#promises,
+#trust {
+    scroll-margin-top: 20px;
+}
+
+.concept-block .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ブロック全体タイトル */
+.concept-block__header {
+    padding: 70px 0 0;
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+.concept-block__overline {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--color-primary-dark);
+    margin: 0 0 14px;
+    font-weight: 600;
+}
+
+.concept-block__heading {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 18px;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+    position: relative;
+    display: inline-block;
+}
+
+.concept-block__heading::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-primary);
+    margin: 18px auto 0;
+}
+
+/* セクション番号ラベル共通 */
+.concept-section-number {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--color-primary-dark);
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.concept-section-number span {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.concept-section-number--center {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* ===== 01 コンセプト ===== */
+.concept-block__01 {
+    padding: 50px 0 80px;
+    background-color: var(--color-white);
+}
+
+.concept-01__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.concept-01__title {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+}
+
+.concept-01__lead {
+    font-size: 1rem;
+    line-height: 1.9;
+    margin: 0 0 28px;
+    color: var(--color-text);
+}
+
+.concept-01__body {
+    font-size: 0.95rem;
+    line-height: 2.1;
+    color: var(--color-text);
+}
+
+.concept-01__body p {
+    margin: 0;
+}
+
+.concept-01__image {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    aspect-ratio: 4 / 3;
+}
+
+.concept-01__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== 02 3つの約束 ===== */
+.concept-block__02 {
+    padding: 80px 0;
+    background-color: var(--color-bg);
+}
+
+.concept-02__title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 50px;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+}
+
+.concept-02__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.promise-item {
+    position: relative;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 50px 24px 32px;
+    text-align: center;
+}
+
+.promise-item__num {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+.promise-item__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-size: 1.6rem;
+}
+
+.promise-item__title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 14px;
+    color: var(--color-text);
+}
+
+.promise-item__text {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+/* ===== 03 安心へのこだわり ===== */
+.concept-block__03 {
+    padding: 80px 0;
+    background-color: var(--color-white);
+}
+
+.concept-03__title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 50px;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+}
+
+.concept-03__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.trust-item {
+    text-align: center;
+}
+
+.trust-item__image {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background-color: var(--color-bg);
+    margin-bottom: 16px;
+}
+
+.trust-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.trust-item__icon {
+    width: 48px;
+    height: 48px;
+    margin: -36px auto 12px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 3px solid var(--color-white);
+    position: relative;
+    z-index: 1;
+}
+
+.trust-item__title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.trust-item__text {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--color-text-light);
+    margin: 0;
+    text-align: left;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 992px) {
+    .concept-01__grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .concept-02__cards {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .concept-03__cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .concept-01__title,
+    .concept-02__title,
+    .concept-03__title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .concept-block__01,
+    .concept-block__02,
+    .concept-block__03 {
+        padding: 50px 0;
+    }
+
+    .concept-03__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .concept-01__title {
+        font-size: 1.6rem;
+    }
+}

@@ -1,16 +1,136 @@
 {#
     ブランドコンセプトセクション
 #}
-<section class="concept-section" style="background-image: url('{{ asset('assets/img/concept_bg.jpg', 'user_data') }}');">
-    <div class="container">
-        <div class="concept-content">
-            <h2 class="concept-title">暮らしの真ん中に<br>愛犬とずっと。</h2>
-            <p class="concept-description">
-                それはきっとすべての飼い主様の心にある大切な想い。<br>
-                私たちは、愛犬との毎日を心から楽しみ、かけがえのない時間を育む飼い主様をサポートします。<br>
-                専門家による信頼できる情報と、本当に良いものだけを厳選した商品で、飼い主様に寄り添い、確かな安心をお届けします。
-            </p>
-            <a href="#" class="btn btn-outline">私たちの想いについて</a>
+<link rel="stylesheet" href="{{ asset('assets/css/concept_top.css', 'user_data') }}">
+<section class="concept-block" id="about">
+
+    {# ===== ブロック全体タイトル ===== #}
+    <div class="concept-block__header">
+        <div class="container">
+            <p class="concept-block__overline">ABOUT US</p>
+            <h2 class="concept-block__heading">「自然派いぬ生活」について</h2>
         </div>
     </div>
+
+    {# ===== 01 コンセプト ===== #}
+    <div class="concept-block__01" id="concept">
+        <div class="container">
+            <div class="concept-01__grid">
+                <div class="concept-01__text">
+                    <div class="concept-section-number">01 — <span>コンセプト</span></div>
+                    <h2 class="concept-01__title">愛犬に、本物の健康を。</h2>
+                    <p class="concept-01__lead">
+                        「何が入っているか、わかるごはんを食べさせたい。」<br>
+                        そんな飼い主さんの願いから、自然派いぬ生活は生まれました。
+                    </p>
+                    <div class="concept-01__body">
+                        <p>私たちが選んだのは、馬肉。</p>
+                        <p>低脂肪・高タンパク・鉄分豊富で、</p>
+                        <p>犬の体にやさしい自然の恵みです。</p>
+                        <p>保存料も着色料も使わない。素材そのままの力で、</p>
+                        <p>愛犬の毎日をすこやかに支えたい。</p>
+                        <p>それが私たちの想いです。</p>
+                    </div>
+                </div>
+                <div class="concept-01__image">
+                    <img src="{{ asset('assets/img/concept_main.webp', 'user_data') }}" alt="愛犬と自然な食材" loading="lazy" onerror="this.style.opacity='0.3'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ===== 02 3つの約束 ===== #}
+    <div class="concept-block__02" id="promises">
+        <div class="container">
+            <div class="concept-section-number concept-section-number--center">02 — <span>3つの約束</span></div>
+            <h2 class="concept-02__title">愛犬への、3つの約束。</h2>
+
+            <div class="concept-02__cards">
+                <div class="promise-item">
+                    <div class="promise-item__num">01</div>
+                    <div class="promise-item__icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="promise-item__title">素材の力だけで、つくる</h3>
+                    <p class="promise-item__text">
+                        保存料・着色料・添加物を<br>
+                        一切使用しません。<br>
+                        馬肉本来の栄養をそのまま<br>
+                        お届けします。
+                    </p>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-item__num">02</div>
+                    <div class="promise-item__icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="promise-item__title">人が食べる品質で、管理する</h3>
+                    <p class="promise-item__text">
+                        馬肉卸直営だからこそ実現できる、<br>
+                        人間用と同水準の品質管理。<br>
+                        安心して与えられます。
+                    </p>
+                </div>
+                <div class="promise-item">
+                    <div class="promise-item__num">03</div>
+                    <div class="promise-item__icon"><i class="fas fa-file-alt"></i></div>
+                    <h3 class="promise-item__title">正直に、伝え続ける</h3>
+                    <p class="promise-item__text">
+                        産地・原材料・製造工程を<br>
+                        すべて開示します。<br>
+                        「知らなかった」をなくすことが<br>
+                        私たちの責任です。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ===== 03 安心へのこだわり ===== #}
+    <div class="concept-block__03" id="trust">
+        <div class="container">
+            <div class="concept-section-number concept-section-number--center">03 — <span>安心へのこだわり</span></div>
+            <h2 class="concept-03__title">選ぶ理由は、安心の積み重ね。</h2>
+
+            <div class="concept-03__cards">
+                <div class="trust-item">
+                    <div class="trust-item__image">
+                        <img src="{{ asset('assets/img/concept_card_1.webp', 'user_data') }}" alt="自社牧場" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="trust-item__icon"><i class="fas fa-horse"></i></div>
+                    <h3 class="trust-item__title">自社牧場の馬肉を直送</h3>
+                    <p class="trust-item__text">
+                        内モンゴルの自社牧場で育てた馬を原料に使用。産地が明確だから、原材料の履歴をしっかり追えます。
+                    </p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-item__image">
+                        <img src="{{ asset('assets/img/concept_card_2.webp', 'user_data') }}" alt="国内工場" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="trust-item__icon"><i class="fas fa-industry"></i></div>
+                    <h3 class="trust-item__title">国内工場で<br>製造・品質管理</h3>
+                    <p class="trust-item__text">
+                        日本国内の工場で加工・製造。衛生管理基準をクリアした施設で、一貫して品質をチェックしています。
+                    </p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-item__image">
+                        <img src="{{ asset('assets/img/concept_card_3.webp', 'user_data') }}" alt="無添加・無着色" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="trust-item__icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="trust-item__title">無添加・無着色</h3>
+                    <p class="trust-item__text">
+                        保存料・人工着色料・香料は使いません。犬の体に余計なものを入れないシンプルな製法にこだわっています。
+                    </p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-item__image">
+                        <img src="{{ asset('assets/img/concept_card_4.webp', 'user_data') }}" alt="馬肉卸20年以上の実績" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="trust-item__icon"><i class="fas fa-award"></i></div>
+                    <h3 class="trust-item__title">馬肉卸20年以上の実績</h3>
+                    <p class="trust-item__text">
+                        人間向け馬肉・馬刺しの卸として培ってきた目利きと品質基準を、そのままペットフードに活かしています。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>

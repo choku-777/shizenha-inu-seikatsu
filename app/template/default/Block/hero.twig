@@ -4,13 +4,22 @@
 <link rel="stylesheet" href="{{ asset('assets/css/top.css', 'user_data') }}">
 <section class="hero-section">
     <div class="hero-slider">
-        {# 今回はカルーセルJSを使わずシンプルな1枚絵にするか、Swiperを導入する想定 #}
-        <div class="hero-slide" style="background-image: url('{{ asset('assets/img/hero_bg.webp', 'user_data') }}'); background-color: #E8DCC8;">
+        <div class="hero-slide" style="background-image: url('{{ asset('assets/img/hero_main.webp', 'user_data') }}'); background-color: #F7F3EB;">
             <div class="container">
                 <div class="hero-content">
-                    <h2 class="hero-title">自然な美味しさで<br>愛犬に笑顔を。</h2>
-                    <p class="hero-text">人が食べても美味しい、安心・安全な国産無添加ドッグフード。</p>
-                    <a href="{{ url('product_list') }}" class="btn btn-primary">商品一覧をみる</a>
+                    <h2 class="hero-title">愛犬に、<br>本物の健康を。</h2>
+                    <p class="hero-subtitle">ヘルシーなごはんが、元気な毎日をつくる。</p>
+                    <div class="hero-body">
+                        <p>大切な家族だから、食べるものにこだわりたい。</p>
+                        <p>馬肉は低脂肪・高タンパク・鉄分豊富な、犬にやさしい自然の恵み。</p>
+                        <p>添加物に頼らず、素材そのままの力で、</p>
+                        <p>愛犬の毎日をすこやかに支えます。</p>
+                    </div>
+                    <a href="{{ url('product_list') }}" class="btn btn-primary hero-btn">
+                        <i class="fas fa-paw"></i>
+                        <span>商品一覧を見る</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
