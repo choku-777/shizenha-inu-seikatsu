@@ -58,21 +58,112 @@
                             <li><a href="{{ url('homepage') }}#trust">安心へのこだわり</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item-soon"><span>お客様の声<span class="nav-soon-badge">準備中</span></span></li>
-                    <li class="nav-item-soon"><span>よくあるご質問<span class="nav-soon-badge">準備中</span></span></li>
+                    <li class="nav-item-soon"><span>お客様の声</span></li>
+                    <li class="nav-item-soon"><span>よくあるご質問</span></li>
                     <li><a href="#">お問い合わせ</a></li>
                 </ul>
             </nav>
 
             {# トライアルボタン / ハンバーガーメニュー #}
             <div class="header-actions">
-                <a href="{{ url('product_detail', {'id': 1}) }}" class="header-trial-btn">
+                <span class="header-trial-btn header-trial-btn--soon" aria-disabled="true">
                     <i class="fas fa-gift"></i> 初回限定トライアル
-                </a>
-                <button type="button" class="mobile-menu-toggle" aria-label="メニューを開く">
+                </span>
+                <button type="button" class="mobile-menu-toggle" aria-label="メニューを開く" aria-controls="mobile-drawer" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </div>
+
+    {# モバイル用ドロワーメニュー #}
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+    <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <div class="mobile-drawer__head">
+            <span class="mobile-drawer__title">メニュー</span>
+            <button type="button" class="mobile-drawer__close" aria-label="メニューを閉じる">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-drawer__nav">
+            <div class="mobile-drawer__section">
+                <p class="mobile-drawer__section-title">商品を探す</p>
+                <ul>
+                    <li><a href="{{ url('product_list') }}">すべて</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=7">レトルト</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=8">フリーズドライ</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=9">ふりかけ</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=10">ジャーキー</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=11">バラバラミンチ</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=12">骨</a></li>
+                    <li><a href="{{ url('product_list') }}?category_id=13">その他</a></li>
+                </ul>
+            </div>
+            <div class="mobile-drawer__section">
+                <p class="mobile-drawer__section-title">ブランドについて</p>
+                <ul>
+                    <li><a href="{{ url('homepage') }}#concept">コンセプト</a></li>
+                    <li><a href="{{ url('homepage') }}#promises">3つの約束</a></li>
+                    <li><a href="{{ url('homepage') }}#trust">安心へのこだわり</a></li>
+                </ul>
+            </div>
+            <div class="mobile-drawer__section">
+                <ul>
+                    <li class="is-soon"><span>お客様の声</span></li>
+                    <li class="is-soon"><span>よくあるご質問</span></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                </ul>
+            </div>
+            <div class="mobile-drawer__section">
+                <ul>
+                    <li><a href="{{ url('mypage') }}"><i class="fas fa-user"></i> マイページ</a></li>
+                    <li><a href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i> カート</a></li>
+                    <li><a href="{{ url('mypage_favorite') }}"><i class="fas fa-heart"></i> お気に入り</a></li>
+                </ul>
+            </div>
+            <div class="mobile-drawer__cta">
+                <span class="header-trial-btn header-trial-btn--soon" aria-disabled="true">
+                    <i class="fas fa-gift"></i> 初回限定トライアル
+                </span>
+            </div>
+            <div class="mobile-drawer__contact">
+                <p><i class="fas fa-phone"></i> 0274-20-1212</p>
+                <p>（受付時間 9:00-18:00 土日祝休）</p>
+            </div>
+        </nav>
+    </aside>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.mobile-menu-toggle');
+            var drawer = document.getElementById('mobile-drawer');
+            var overlay = document.getElementById('mobile-drawer-overlay');
+            var closeBtn = document.querySelector('.mobile-drawer__close');
+            if (!toggle || !drawer || !overlay) return;
+
+            function open() {
+                drawer.classList.add('is-open');
+                overlay.classList.add('is-open');
+                document.body.classList.add('drawer-open');
+                drawer.setAttribute('aria-hidden', 'false');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+            function close() {
+                drawer.classList.remove('is-open');
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('drawer-open');
+                drawer.setAttribute('aria-hidden', 'true');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+            toggle.addEventListener('click', function() {
+                drawer.classList.contains('is-open') ? close() : open();
+            });
+            overlay.addEventListener('click', close);
+            if (closeBtn) closeBtn.addEventListener('click', close);
+            // Esc キーで閉じる
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+            });
+        })();
+    </script>
 </header>
