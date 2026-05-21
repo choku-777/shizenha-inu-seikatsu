@@ -1,0 +1,358 @@
+{#
+    初回限定トライアルセット ページ
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'trial_page' %}
+
+{% block main %}
+<link rel="stylesheet" href="{{ asset('assets/css/trial.css?v=20260521i', 'user_data') }}">
+
+{# CTAボタンのリンク先・文言をログイン状態で出し分け
+   id: 19 = トライアル専用商品「はじめての馬肉ペットフードセット【会員限定・1回限り】」 #}
+{% if is_granted('ROLE_USER') %}
+    {% set trial_cta_url = url('product_detail', {'id': 19}) %}
+    {% set trial_cta_label = 'トライアルセットを注文する' %}
+{% else %}
+    {% set trial_cta_url = url('entry') %}
+    {% set trial_cta_label = '会員登録して注文する' %}
+{% endif %}
+
+<div class="trial-page">
+
+    {# ============================================================
+       SECTION 1: ファーストビュー
+       画像① ヒーロービジュアル（4品を並べた商品写真 or ライフスタイル）
+       推奨サイズ: 600×520px 以上、縦長〜正方形
+       ============================================================ #}
+    <section class="trial-hero">
+        <div class="trial-container">
+            <div class="trial-badge-row">
+                <span class="trial-badge trial-badge--red">会員限定</span>
+                <span class="trial-badge trial-badge--red">お一人様1回限り</span>
+                <span class="trial-badge trial-badge--green">送料無料</span>
+                <span class="trial-badge trial-badge--gray">犬・猫 両用</span>
+            </div>
+            <div class="trial-hero__layout">
+                {# 画像① #}
+                <div class="trial-hero__img">
+                    <img src="{{ asset('assets/img/trial_hero.webp', 'user_data') }}" alt="初回限定トライアルセット 4種詰め合わせ" loading="eager">
+                </div>
+                <div class="trial-hero__text">
+                    <h1 class="trial-hero__catch">うちの子、馬肉が好きかも。<br>まずは試してほしい4種セット。</h1>
+                    <p class="trial-hero__sub">モンゴル国の自社牧場から直送。国産工場で人間用品質に仕上げた馬肉フードを、4種類まとめてお試しいただけます。</p>
+                    <div class="trial-price">
+                        <div class="trial-price__orig">通常合計 2,620円（税込）</div>
+                        <div class="trial-price__main">
+                            <span class="trial-price__num">980</span>
+                            <span class="trial-price__unit">円（税込・送料無料）</span>
+                            <span class="trial-price__off">63% OFF</span>
+                        </div>
+                    </div>
+                    <a href="{{ trial_cta_url }}" class="trial-cta-btn">{{ trial_cta_label }}</a>
+                    <p class="trial-cta-note">会員登録無料 / 1アカウントにつき1回限り</p>
+                </div>
+            </div>
+
+            {# 画像② セット全体フラットレイ（横幅フル） #}
+            <div class="trial-hero__flatlay">
+                <img src="{{ asset('assets/img/trial_flatlay.webp', 'user_data') }}" alt="馬肉フード4種類のセット全品" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    {# ============================================================
+       SECTION 2: 3つの安心
+       画像③〜⑤ 各カード上部の写真
+       ============================================================ #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">安心・品質</p>
+            <h2 class="trial-section__title">3つの安心ポイント</h2>
+            <div class="trial-trust__grid">
+                <div class="trial-trust__card">
+                    <div class="trial-trust__img">
+                        <img src="{{ asset('assets/img/trial_trust_1.webp', 'user_data') }}" alt="モンゴル国の自社牧場" loading="lazy">
+                    </div>
+                    <div class="trial-trust__body">
+                        <div class="trial-trust__title">モンゴル国自牧場産</div>
+                        <div class="trial-trust__desc">自社牧場で育てた馬のみ使用。原料の産地・品質を一貫して管理しています。</div>
+                    </div>
+                </div>
+                <div class="trial-trust__card">
+                    <div class="trial-trust__img">
+                        <img src="{{ asset('assets/img/trial_trust_2.webp', 'user_data') }}" alt="国内の食品工場" loading="lazy">
+                    </div>
+                    <div class="trial-trust__body">
+                        <div class="trial-trust__title">国産工場製造</div>
+                        <div class="trial-trust__desc">国内の食品工場で製造。衛生管理・品質基準は人間用食品と同水準です。</div>
+                    </div>
+                </div>
+                <div class="trial-trust__card">
+                    <div class="trial-trust__img">
+                        <img src="{{ asset('assets/img/trial_trust_3.webp', 'user_data') }}" alt="ヒューマングレードの馬肉" loading="lazy">
+                    </div>
+                    <div class="trial-trust__body">
+                        <div class="trial-trust__title">ヒューマングレード</div>
+                        <div class="trial-trust__desc">人が食べられる品質の馬肉のみ使用。添加物不使用でシンプルな原材料。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ============================================================
+       SECTION 3: セット内容
+       画像⑥〜⑨ 各商品のパッケージ写真
+       ============================================================ #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">セット内容</p>
+            <h2 class="trial-section__title">4種類の馬肉フードが<br>全部入っています</h2>
+            <div class="trial-items">
+                <div class="trial-item">
+                    <div class="trial-item__thumb">
+                        <img src="{{ asset('assets/img/trial_item_jerky.webp', 'user_data') }}" alt="馬肉ミックスジャーキー" loading="lazy">
+                    </div>
+                    <div class="trial-item__body">
+                        <div class="trial-item__name">馬肉ミックスジャーキー</div>
+                        <div class="trial-item__size">30g / 1袋</div>
+                        <div class="trial-item__desc">噛みごたえのある食感でおやつに最適。歯のケアにも。犬猫どちらにもお使いいただけます。</div>
+                        <div class="trial-item__price-row">
+                            <span class="trial-item__price-orig">通常 690円</span>
+                            <span class="trial-item__included">セットに含む</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trial-item">
+                    <div class="trial-item__thumb">
+                        <img src="{{ asset('assets/img/trial_item_retort.webp', 'user_data') }}" alt="馬肉レトルト" loading="lazy">
+                    </div>
+                    <div class="trial-item__body">
+                        <div class="trial-item__name">馬肉レトルト</div>
+                        <div class="trial-item__size">100g / 1袋</div>
+                        <div class="trial-item__desc">温めてそのままトッピングとして使えます。食欲が落ちているときや療養中のサポートにも。</div>
+                        <div class="trial-item__price-row">
+                            <span class="trial-item__price-orig">通常 640円</span>
+                            <span class="trial-item__included">セットに含む</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trial-item">
+                    <div class="trial-item__thumb">
+                        <img src="{{ asset('assets/img/trial_item_freezedry.webp', 'user_data') }}" alt="馬肉フリーズドライ キューブ" loading="lazy">
+                    </div>
+                    <div class="trial-item__body">
+                        <div class="trial-item__name">馬肉フリーズドライ キューブ</div>
+                        <div class="trial-item__size">20g / 1袋</div>
+                        <div class="trial-item__desc">栄養素を損なわず凍結乾燥。そのままおやつに、または水で戻してフードにトッピングできます。</div>
+                        <div class="trial-item__price-row">
+                            <span class="trial-item__price-orig">通常 600円</span>
+                            <span class="trial-item__included">セットに含む</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trial-item">
+                    <div class="trial-item__thumb">
+                        <img src="{{ asset('assets/img/trial_item_furikake.webp', 'user_data') }}" alt="馬肉のふりかけ" loading="lazy">
+                    </div>
+                    <div class="trial-item__body">
+                        <div class="trial-item__name">馬肉のふりかけ</div>
+                        <div class="trial-item__size">30g / 1袋</div>
+                        <div class="trial-item__desc">いつものフードにパラパラかけるだけ。食欲促進・栄養補給に。小食な子にも好評です。</div>
+                        <div class="trial-item__price-row">
+                            <span class="trial-item__price-orig">通常 690円</span>
+                            <span class="trial-item__included">セットに含む</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="trial-item__total">
+                <div class="trial-item__total-label">通常合計 <span class="trial-strike">2,620円</span></div>
+                <div class="trial-item__total-price">
+                    <span class="trial-badge trial-badge--red">63% OFF</span>
+                    <span class="trial-item__total-num">980円</span>
+                    <span class="trial-item__total-sub">税込・送料無料</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ============================================================
+       SECTION 4: 選ばれる理由
+       画像⑩ ライフスタイルバナー
+       ============================================================ #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">特長</p>
+            <h2 class="trial-section__title">馬肉が選ばれる3つの理由</h2>
+            <div class="trial-reason__grid">
+                <div class="trial-reason__card">
+                    <div class="trial-reason__head">
+                        <span class="trial-reason__icon">🌿</span>
+                        <span class="trial-reason__title">アレルギーの子にも</span>
+                    </div>
+                    <p class="trial-reason__body">牛・豚・鶏が食べられないペットにも対応。馬肉はアレルギー原因になりにくい低アレルゲン食材として注目されています。</p>
+                </div>
+                <div class="trial-reason__card">
+                    <div class="trial-reason__head">
+                        <span class="trial-reason__icon">💪</span>
+                        <span class="trial-reason__title">低脂肪・高タンパク</span>
+                    </div>
+                    <p class="trial-reason__body">牛肉に比べて脂肪分が少なく、良質なタンパク質が豊富。肥満気味の子や、筋肉を維持したいシニアにも適しています。</p>
+                </div>
+                <div class="trial-reason__card">
+                    <div class="trial-reason__head">
+                        <span class="trial-reason__icon">🚫</span>
+                        <span class="trial-reason__title">添加物不使用</span>
+                    </div>
+                    <p class="trial-reason__body">保存料・着色料・香料は一切不使用。馬肉本来の旨みと栄養をそのままお届けします。</p>
+                </div>
+            </div>
+
+            <div class="trial-lifestyle">
+                <img src="{{ asset('assets/img/trial_lifestyle.webp', 'user_data') }}" alt="愛犬・愛猫との暮らし" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    {# ============================================================
+       SECTION 5: お客様の声
+       画像⑪〜⑬ ペット写真
+       ============================================================ #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">レビュー</p>
+            <h2 class="trial-section__title">お客様の声</h2>
+
+            <div class="trial-voices">
+            <div class="trial-voice">
+                <div class="trial-voice__header">
+                    <div class="trial-voice__pet">
+                        <img src="{{ asset('assets/img/trial_voice_1.webp', 'user_data') }}" alt="柴犬" loading="lazy">
+                    </div>
+                    <div class="trial-voice__meta">
+                        <div class="trial-voice__stars">★★★★★</div>
+                        <div class="trial-voice__attr">柴犬（5歳）の飼い主 / 30代女性</div>
+                    </div>
+                </div>
+                <p class="trial-voice__text">フードをなかなか食べてくれない子だったのですが、馬肉のふりかけをかけたら完食するようになりました。においが違うのか、すごく喜んで食べています。</p>
+            </div>
+
+            <div class="trial-voice">
+                <div class="trial-voice__header">
+                    <div class="trial-voice__pet">
+                        <img src="{{ asset('assets/img/trial_voice_2.webp', 'user_data') }}" alt="猫" loading="lazy">
+                    </div>
+                    <div class="trial-voice__meta">
+                        <div class="trial-voice__stars">★★★★★</div>
+                        <div class="trial-voice__attr">猫（3歳）の飼い主 / 40代男性</div>
+                    </div>
+                </div>
+                <p class="trial-voice__text">チキンアレルギーの猫を飼っていて、馬肉は本当に助かっています。品質も安心できるし、国産工場製造という点が決め手になりました。</p>
+            </div>
+
+            <div class="trial-voice">
+                <div class="trial-voice__header">
+                    <div class="trial-voice__pet">
+                        <img src="{{ asset('assets/img/trial_voice_3.webp', 'user_data') }}" alt="犬と猫" loading="lazy">
+                    </div>
+                    <div class="trial-voice__meta">
+                        <div class="trial-voice__stars">★★★★★</div>
+                        <div class="trial-voice__attr">犬・猫（多頭飼い）の飼い主 / 40代女性</div>
+                    </div>
+                </div>
+                <p class="trial-voice__text">ジャーキーは犬も猫も両方大喜び。うちは多頭飼いなので一緒に使えるのがとても便利です。また購入します。</p>
+            </div>
+            </div>
+
+            <p class="trial-voice__note">※既存商品のレビューを参考に掲載しています。</p>
+        </div>
+    </section>
+
+    {# SECTION 6: 定期便への誘導 #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">定期便</p>
+            <h2 class="trial-section__title">気に入ったら定期便で<br>お得に続けませんか？</h2>
+            <div class="trial-sub">
+                <p class="trial-sub__desc">トライアルセットをお試しいただいたお客様には、定期便を<strong>通常価格より15% OFF</strong>でご提供しています。毎月自動でお届けするから、注文し忘れる心配もありません。</p>
+                <div class="trial-sub__steps">
+                    <div class="trial-sub__step">
+                        <div class="trial-sub__num">1</div>
+                        <div>
+                            <div class="trial-sub__step-title">トライアルセットを試す</div>
+                            <div class="trial-sub__step-desc">今回の4種お試しセット（980円）でお気に入りの商品を見つけてください。</div>
+                        </div>
+                    </div>
+                    <div class="trial-sub__step">
+                        <div class="trial-sub__num">2</div>
+                        <div>
+                            <div class="trial-sub__step-title">定期便に申し込む</div>
+                            <div class="trial-sub__step-desc">通常価格より15% OFF。内容・頻度の変更、停止はいつでもOK。</div>
+                        </div>
+                    </div>
+                    <div class="trial-sub__step">
+                        <div class="trial-sub__num">3</div>
+                        <div>
+                            <div class="trial-sub__step-title">毎月自動でお届け</div>
+                            <div class="trial-sub__step-desc">注文の手間なし。ペットの様子に合わせて内容のカスタマイズも可能です。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# SECTION 7: よくある質問 #}
+    <section class="trial-section">
+        <div class="trial-container">
+            <p class="trial-eyebrow">FAQ</p>
+            <h2 class="trial-section__title">よくある質問</h2>
+            <div class="trial-faqs">
+            <div class="trial-faq">
+                <div class="trial-faq__q">会員登録は無料ですか？</div>
+                <div class="trial-faq__a">はい、無料です。メールアドレスがあればすぐにご登録いただけます。</div>
+            </div>
+            <div class="trial-faq">
+                <div class="trial-faq__q">なぜ1回限りなのですか？</div>
+                <div class="trial-faq__a">通常価格より大幅割引のため、より多くの方にお試しいただけるよう1アカウント1回限りとしています。気に入っていただけた場合は定期便をご利用ください。</div>
+            </div>
+            <div class="trial-faq">
+                <div class="trial-faq__q">犬にも猫にも使えますか？</div>
+                <div class="trial-faq__a">はい、4品すべて犬・猫どちらにもお使いいただけます。多頭飼いのご家庭にも好評です。</div>
+            </div>
+            <div class="trial-faq">
+                <div class="trial-faq__q">配送方法を教えてください。</div>
+                <div class="trial-faq__a">クリックポスト（日本郵便）でのポスト投函でお届けします。追跡番号付きのため配送状況のご確認が可能です。</div>
+            </div>
+            <div class="trial-faq">
+                <div class="trial-faq__q">原産国はどこですか？</div>
+                <div class="trial-faq__a">馬肉はモンゴル国の自社牧場産です。製造（加工）は日本国内の食品工場で行っています。</div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    {# SECTION 8: 最終CTA #}
+    <section class="trial-section trial-section--last">
+        <div class="trial-container">
+            <div class="trial-final">
+                <p class="trial-final__orig">通常合計 2,620円（税込）</p>
+                <div class="trial-final__price-row">
+                    <span class="trial-badge trial-badge--red trial-badge--lg">63% OFF</span>
+                    <span class="trial-final__num">980</span>
+                    <span class="trial-final__unit">円（税込・送料無料）</span>
+                </div>
+                <a href="{{ trial_cta_url }}" class="trial-cta-btn">{{ trial_cta_label }}</a>
+                <p class="trial-cta-note">会員登録無料 / 1アカウントにつき1回限り / クリックポスト発送</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

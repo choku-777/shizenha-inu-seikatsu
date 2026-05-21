@@ -66,9 +66,9 @@
 
             {# トライアルボタン / ハンバーガーメニュー #}
             <div class="header-actions">
-                <span class="header-trial-btn header-trial-btn--soon" aria-disabled="true">
+                <a href="{{ url('user_data', {'route': 'trial'}) }}" class="header-trial-btn">
                     <i class="fas fa-gift"></i> 初回限定トライアル
-                </span>
+                </a>
                 <button type="button" class="mobile-menu-toggle" aria-label="メニューを開く" aria-controls="mobile-drawer" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -122,9 +122,9 @@
                 </ul>
             </div>
             <div class="mobile-drawer__cta">
-                <span class="header-trial-btn header-trial-btn--soon" aria-disabled="true">
+                <a href="{{ url('user_data', {'route': 'trial'}) }}" class="header-trial-btn">
                     <i class="fas fa-gift"></i> 初回限定トライアル
-                </span>
+                </a>
             </div>
             <div class="mobile-drawer__contact">
                 <p><i class="fas fa-phone"></i> 0274-20-1234</p>
