@@ -170,7 +170,7 @@
 
 /* トライアルバナー（右上） */
 .header-trial-btn {
-    background-color: var(--color-primary);
+    background-color: #6FA56C;
     color: var(--color-white);
     padding: 8px 15px;
     border-radius: 20px;
@@ -182,7 +182,7 @@
 }
 
 .header-trial-btn:hover {
-    background-color: var(--color-primary-dark);
+    background-color: #5C8F58;
     color: var(--color-white);
     opacity: 1;
 }

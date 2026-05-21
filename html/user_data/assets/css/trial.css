@@ -195,7 +195,7 @@
     display: block;
     width: 100%;
     padding: 16px;
-    background: var(--color-primary);
+    background: #6FA56C;
     color: var(--color-white);
     font-family: var(--font-body, 'Noto Sans JP', sans-serif);
     font-size: 15px;
@@ -209,7 +209,7 @@
     transition: background 0.18s, opacity 0.18s;
 }
 .trial-cta-btn:hover {
-    background: var(--color-primary-dark);
+    background: #5C8F58;
     color: var(--color-white);
     opacity: 1;
 }
