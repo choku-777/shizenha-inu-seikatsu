@@ -854,7 +854,9 @@
 }
 
 .cta-box--trial {
-    background: linear-gradient(135deg, #6FA56C 0%, #4F834C 100%);
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 100%), url('../img/trial_flatlay.webp');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
 }
 
@@ -862,9 +864,15 @@
     color: var(--color-white);
 }
 
-.cta-box--consult,
-.cta-box--subscription {
+.cta-box--consult {
     background: linear-gradient(135deg, #6FA56C 0%, #4F834C 100%);
+    color: var(--color-white);
+}
+
+.cta-box--subscription {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 100%), url('../img/cta_subscription_bg.webp');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
 }
 
