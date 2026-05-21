@@ -10,15 +10,11 @@
 {% block main %}
 <link rel="stylesheet" href="{{ asset('assets/css/trial.css?v=20260521j', 'user_data') }}">
 
-{# CTAボタンのリンク先・文言をログイン状態で出し分け
+{# CTAボタン：ログイン有無に関わらずトライアル商品ページへ遷移。
+   未会員はチェックアウト画面で会員登録/ログインを行う（EC-CUBE標準フロー）。
    id: 19 = トライアル専用商品「はじめての馬肉ペットフードセット【会員限定・1回限り】」 #}
-{% if is_granted('ROLE_USER') %}
-    {% set trial_cta_url = url('product_detail', {'id': 19}) %}
-    {% set trial_cta_label = 'トライアルセットを注文する' %}
-{% else %}
-    {% set trial_cta_url = url('entry') %}
-    {% set trial_cta_label = '会員登録して注文する' %}
-{% endif %}
+{% set trial_cta_url = url('product_detail', {'id': 19}) %}
+{% set trial_cta_label = 'トライアルセットを注文する' %}
 
 <div class="trial-page">
 
