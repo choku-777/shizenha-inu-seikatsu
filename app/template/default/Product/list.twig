@@ -6,7 +6,7 @@
 {% set body_class = 'product_page' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('assets/css/product_list.css', 'user_data') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/product_list.css', 'user_data') }}?v=20260521">
 {% endblock %}
 
 {% block javascript %}
@@ -157,7 +157,17 @@
                             <img src="{{ asset('assets/img/trial_hero.webp', 'user_data') }}" alt="初回限定トライアルセット" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <div class="sidebar-featured__label">初回限定トライアルセット</div>
-                        <div class="sidebar-featured__sub">特別価格でお試し</div>
+                        <div class="sidebar-featured__sub">4種類の馬肉フードをお試し</div>
+                        <div class="sidebar-featured__price">
+                            <span class="sidebar-featured__price-orig">通常合計 2,620円</span>
+                            <div class="sidebar-featured__price-main">
+                                <span class="sidebar-featured__price-num">980</span>
+                                <span class="sidebar-featured__price-unit">円（税込）</span>
+                                <span class="sidebar-featured__off">63%OFF</span>
+                            </div>
+                            <span class="sidebar-featured__free"><i class="fas fa-truck"></i> 送料無料</span>
+                        </div>
+                        <span class="sidebar-featured__btn">お得に試してみる <i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
 
