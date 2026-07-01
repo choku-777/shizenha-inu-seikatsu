@@ -351,7 +351,7 @@
     color: var(--color-text-light);
 }
 
-/* 「80%のお客様が選んでいます」吹き出し */
+/* 定期便の人気バッジ */
 .order-type-option__badge-wrap {
     position: absolute;
     left: 0;

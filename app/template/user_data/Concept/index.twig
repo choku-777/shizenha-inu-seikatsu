@@ -1,0 +1,125 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'concept_page' %}
+
+{% block main %}
+<link rel="stylesheet" href="{{ asset('assets/css/concept.css', 'user_data') }}">
+
+<div class="concept-page">
+
+    <section class="concept-hero" style="background-image: url('{{ asset('assets/img/concept_hero.webp', 'user_data') }}');">
+        <div class="concept-hero-overlay"></div>
+        <div class="container">
+            <p class="concept-hero-sub">CONCEPT</p>
+            <h1 class="concept-hero-title">馬肉の会社がつくった、<br>愛犬のためのごはん。</h1>
+            <div class="concept-hero-lead">
+                <p>「うましっぽ」は、</p>
+                <p>馬肉と向き合って10年の大陸通商が立ち上げた、</p>
+                <p>愛犬のためのフードブランドです。</p>
+                <p>&nbsp;</p>
+                <p>モンゴルの牧場から、自社工場での加工まで。</p>
+                <p>馬肉を知り尽くしたわたしたちだからこそ、</p>
+                <p>自信を持ってお届けできるごはんがあります。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="concept-story">
+        <div class="container">
+            <p class="concept-section-label">STORY</p>
+            <h2 class="concept-section-title">馬肉のプロが、愛犬のごはんに向き合う理由</h2>
+
+            <div class="concept-story-body">
+                <p>わたしたちは、人が食べる馬肉・馬刺しを扱ってきました。<br>その経験の中で見えてきたのが、馬肉が持つ、犬にとってのうれしい特長です。</p>
+
+                <div class="concept-story-image">
+                    <img src="{{ asset('assets/img/concept_story.webp', 'user_data') }}" alt="馬肉" loading="lazy">
+                </div>
+
+                <div class="concept-story-points">
+                    <div class="concept-story-point">
+                        <strong>体にやさしい。</strong>
+                        <span>牛・豚・鶏が苦手な子にも取り入れやすい食材です。</span>
+                    </div>
+                    <div class="concept-story-point">
+                        <strong>栄養バランス。</strong>
+                        <span>たんぱく質をしっかり、脂肪はひかえめ。胃腸にもやさしい。</span>
+                    </div>
+                    <div class="concept-story-point">
+                        <strong>素材が見える。</strong>
+                        <span>育て方から加工まで、わたしたちの目が届く安心。</span>
+                    </div>
+                </div>
+
+                <p>市販のフードを見渡すと、「これなら胸を張れる」と思えるものは、<br>思ったより多くありませんでした。</p>
+
+                <p class="concept-story-catch">だから、自分たちの手でつくることにしました。</p>
+
+                <p>馬肉と向き合ってきた10年の経験を、そのまま愛犬のために。<br>それが、「うましっぽ」のはじまりです。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="concept-commitments">
+        <div class="container">
+            <p class="concept-section-label">COMMITMENTS</p>
+            <h2 class="concept-section-title">3つのこだわり</h2>
+
+            <div class="concept-commitment-list">
+                <div class="concept-commitment">
+                    <div class="concept-commitment-image">
+                        <img src="{{ asset('assets/img/concept_c1.webp', 'user_data') }}" alt="モンゴルの牧場から" loading="lazy">
+                    </div>
+                    <div class="concept-commitment-text">
+                        <div class="concept-commitment-number">01</div>
+                        <h3 class="concept-commitment-title">モンゴルの牧場から</h3>
+                        <p>原料の馬は、<strong>モンゴルの牧場</strong>で育ったもの。<br>広い大地でのびのびと育ち、産地がはっきりしているから、<br>どんな馬肉を使っているかを、きちんとお伝えできます。</p>
+                    </div>
+                </div>
+
+                <div class="concept-commitment concept-commitment-reverse">
+                    <div class="concept-commitment-image">
+                        <img src="{{ asset('assets/img/concept_c2.webp', 'user_data') }}" alt="自社工場で、ていねいに" loading="lazy">
+                    </div>
+                    <div class="concept-commitment-text">
+                        <div class="concept-commitment-number">02</div>
+                        <h3 class="concept-commitment-title">自社工場で、ていねいに</h3>
+                        <p>仕入れから加工まで、<strong>自社の工場</strong>で一貫して管理。<br>馬肉を扱ってきたプロの目で、一つひとつ品質を見極めます。<br>モンゴルの自然と、日本での丁寧な加工。<br>その両方が、うましっぽの強みです。</p>
+                    </div>
+                </div>
+
+                <div class="concept-commitment">
+                    <div class="concept-commitment-image">
+                        <img src="{{ asset('assets/img/concept_c3.webp', 'user_data') }}" alt="人の基準で、愛犬に" loading="lazy">
+                    </div>
+                    <div class="concept-commitment-text">
+                        <div class="concept-commitment-number">03</div>
+                        <h3 class="concept-commitment-title">人の基準で、愛犬に</h3>
+                        <p>もともと人が食べる馬肉を扱ってきた、わたしたち。<br>愛犬のフードも、<strong>人と同じ基準</strong>でつくります。<br>「安心できるものだけを、家族に」。<br>その思いは、飼い主様と変わりません。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="concept-message" style="background-image: url('{{ asset('assets/img/concept_message.webp', 'user_data') }}');">
+        <div class="concept-message-overlay"></div>
+        <div class="container">
+            <p class="concept-section-label">MESSAGE</p>
+            <div class="concept-message-body">
+                <p>愛犬は、家族の一員。</p>
+                <p>毎日のごはんだからこそ、<br>心から安心できるものを選んでほしい。</p>
+                <p>馬肉と歩んできた10年の経験を込めて、<br>うましっぽはこれからも、<br>愛犬の健やかな毎日に寄り添います。</p>
+                <p class="concept-message-catch">わたしたちのごはんが、<br>あなたと愛犬の毎日に、<br>寄り添えますように。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="concept-cta">
+        <div class="container">
+            <a href="{{ url('product_list') }}" class="btn">商品を見る</a>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

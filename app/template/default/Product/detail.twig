@@ -1,5 +1,5 @@
 {#
-    商品詳細ページ - 自然派いぬ生活カスタムデザイン
+    商品詳細ページ - うましっぽカスタムデザイン
 #}
 {% extends 'default_frame.twig' %}
 
@@ -98,7 +98,7 @@
                     var sub = isSubscription
                         ? '<span class="order-type-option__sub">毎回約10%OFF・いつでも解約OK</span>'
                         : '<span class="order-type-option__sub">1回のみのお買い物</span>';
-                    var badge = isSubscription ? '<span class="order-type-option__badge">🌟 80%のお客様が選んでいます</span>' : '';
+                    var badge = isSubscription ? '<span class="order-type-option__badge">🌟 いちばん人気のプラン</span>' : '';
                     html +=
                         '<label class="order-type-option' + (isSubscription ? ' order-type-option--subscription' : '') + (isSelected ? ' is-selected' : '') + '">' +
                             (badge ? '<div class="order-type-option__badge-wrap">' + badge + '</div>' : '') +

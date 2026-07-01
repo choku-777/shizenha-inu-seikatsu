@@ -1,0 +1,378 @@
+/* =========================================================================
+   コンセプトページ
+   ========================================================================= */
+.concept-page {
+    color: var(--color-text);
+    line-height: 2;
+}
+
+.concept-page section {
+    padding: 80px 0;
+}
+
+.concept-page .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* セクション共通 */
+.concept-section-label {
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--color-primary);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.concept-section-title {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.concept-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* ヒーロー */
+.concept-hero {
+    background-color: var(--color-primary-dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 120px 0 !important;
+    position: relative;
+    color: var(--color-white);
+}
+
+.concept-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(61, 43, 31, 0.5);
+    z-index: 1;
+}
+
+.concept-hero-sub {
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--color-primary-light);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.concept-hero-title {
+    font-family: var(--font-body);
+    font-size: 2.4rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: var(--color-white);
+}
+
+.concept-hero-lead {
+    font-size: 1rem;
+    line-height: 2.2;
+}
+
+.concept-hero-lead p {
+    margin: 0;
+}
+
+/* ストーリー */
+.concept-story {
+    background-color: var(--color-white);
+}
+
+.concept-story-body {
+    font-size: 1rem;
+}
+
+.concept-story-body p {
+    margin-bottom: 30px;
+}
+
+.concept-story-image {
+    margin: 40px -20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-border);
+    aspect-ratio: 16 / 9;
+}
+
+.concept-story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.concept-story-quote {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 1.8rem !important;
+    color: var(--color-primary);
+    padding: 20px 0;
+    position: relative;
+}
+
+.concept-story-quote::before,
+.concept-story-quote::after {
+    content: '"';
+    font-size: 3rem;
+    color: var(--color-primary-light);
+    opacity: 0.5;
+}
+
+.concept-story-points {
+    background-color: var(--color-bg);
+    padding: 30px 40px;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-primary);
+    margin: 40px 0;
+}
+
+.concept-story-point {
+    padding: 10px 0;
+}
+
+.concept-story-point strong {
+    display: block;
+    color: var(--color-primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.concept-story-point span {
+    font-size: 0.95rem;
+}
+
+.concept-story-catch {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 1.6rem !important;
+    color: var(--color-primary-dark);
+    padding: 30px 0 !important;
+    font-weight: bold;
+}
+
+/* 3つのこだわり */
+.concept-commitments {
+    background-color: var(--color-bg);
+}
+
+.concept-commitment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.concept-commitment {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.concept-commitment-reverse {
+    direction: rtl;
+}
+
+.concept-commitment-reverse > * {
+    direction: ltr;
+}
+
+.concept-commitment-image {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background-color: var(--color-border);
+}
+
+.concept-commitment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.concept-commitment-text {
+    padding: 20px;
+}
+
+.concept-commitment-number {
+    font-family: var(--font-body);
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 15px;
+}
+
+.concept-commitment-title {
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--color-primary-light);
+}
+
+.concept-commitment p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 2;
+}
+
+.concept-commitment p strong {
+    color: var(--color-primary-dark);
+}
+
+/* メッセージ */
+.concept-message {
+    background-color: var(--color-primary-dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+    color: var(--color-white);
+    padding: 100px 0 !important;
+}
+
+.concept-message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(61, 43, 31, 0.65);
+    z-index: 1;
+}
+
+.concept-message .concept-section-label {
+    color: var(--color-primary-light);
+}
+
+.concept-message-body {
+    font-size: 1rem;
+    line-height: 2.2;
+    color: var(--color-white);
+}
+
+.concept-message-body p {
+    margin-bottom: 30px;
+}
+
+.concept-message-catch {
+    font-family: var(--font-body);
+    font-size: 1.5rem !important;
+    color: var(--color-white);
+    padding-top: 30px;
+    font-weight: bold;
+    line-height: 1.8 !important;
+}
+
+/* CTA */
+.concept-cta {
+    background-color: var(--color-bg);
+    text-align: center;
+    padding: 60px 0 !important;
+}
+
+.concept-cta .btn {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 15px 60px;
+    border-radius: 30px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.concept-cta .btn:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    opacity: 1;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .concept-page section {
+        padding: 50px 0;
+    }
+
+    .concept-hero {
+        padding: 80px 0 !important;
+    }
+
+    .concept-hero-title {
+        font-size: 1.6rem;
+    }
+
+    .concept-section-title {
+        font-size: 1.4rem;
+    }
+
+    .concept-story-quote {
+        font-size: 1.4rem !important;
+    }
+
+    .concept-story-catch {
+        font-size: 1.3rem !important;
+    }
+
+    .concept-story-image {
+        margin: 30px 0;
+    }
+
+    .concept-commitment {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .concept-commitment-reverse {
+        direction: ltr;
+    }
+
+    .concept-commitment-text {
+        padding: 10px;
+    }
+
+    .concept-commitment-title {
+        font-size: 1.2rem;
+    }
+
+    .concept-story-points {
+        padding: 25px 20px;
+    }
+
+    .concept-message {
+        padding: 60px 0 !important;
+    }
+
+    .concept-message-catch {
+        font-size: 1.2rem !important;
+    }
+}
