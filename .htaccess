@@ -53,6 +53,12 @@ DirectoryIndex index.php index.html .ht
 
     RewriteEngine On
 
+    # === ドメイン移行: 旧 shizenha-inu.life → 新 umashippo.jp ===
+    # 旧ドメインでアクセスされた時だけ転送（新ドメインは対象外＝シンボリックリンク共有でもループしない）
+    # パス・クエリを保持し https に統一。当面は 302(一時)、問題なければ 301(恒久) に変更する
+    RewriteCond %{HTTP_HOST} ^(www\.)?shizenha-inu\.life$ [NC]
+    RewriteRule ^(.*)$ https://umashippo.jp/$1 [R=302,L]
+
     # Acceptヘッダがimage/webpを含む場合
     RewriteCond %{HTTP_ACCEPT} image/webp
     RewriteCond %{SCRIPT_FILENAME}.webp -f
