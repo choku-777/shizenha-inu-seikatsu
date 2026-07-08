@@ -8,7 +8,7 @@
 {% set body_class = 'trial_page' %}
 
 {% block main %}
-<link rel="stylesheet" href="{{ asset('assets/css/trial.css?v=20260521j', 'user_data') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/trial.css?v=20260706', 'user_data') }}">
 
 {# CTAボタン：ログイン有無に関わらずトライアル商品ページへ遷移。
    未会員はチェックアウト画面で会員登録/ログインを行う（EC-CUBE標準フロー）。
@@ -27,7 +27,7 @@
         <div class="trial-container">
             <div class="trial-badge-row">
                 <span class="trial-badge trial-badge--red">会員限定</span>
-                <span class="trial-badge trial-badge--red">お一人様1回限り</span>
+                <span class="trial-badge trial-badge--red">お一人様1回・1セット限り</span>
                 <span class="trial-badge trial-badge--green">送料無料</span>
                 <span class="trial-badge trial-badge--gray">犬・猫 両用</span>
             </div>
@@ -48,7 +48,8 @@
                         </div>
                     </div>
                     <a href="{{ trial_cta_url }}" class="trial-cta-btn">{{ trial_cta_label }}</a>
-                    <p class="trial-cta-note">会員登録無料 / 1アカウントにつき1回限り</p>
+                    <p class="trial-cta-note">会員登録無料 / お一人様1回・1セット限り / 送料無料</p>
+                    <p class="trial-limit-note">※本セットは<strong>お一人様1回・1セットまで</strong>です。2セット以上のご注文はお受けできません。</p>
                 </div>
             </div>
 
@@ -321,6 +322,10 @@
                 <div class="trial-faq__a">通常価格より大幅割引のため、より多くの方にお試しいただけるよう1アカウント1回限りとしています。気に入っていただけた場合は定期便をご利用ください。</div>
             </div>
             <div class="trial-faq">
+                <div class="trial-faq__q">複数セット購入できますか？</div>
+                <div class="trial-faq__a">本セットはお一人様1回・1セットまでの限定価格です。2セット以上のご注文はお受けできませんので、あらかじめご了承ください。たくさん続けたい場合は、通常商品や定期便をご利用ください。</div>
+            </div>
+            <div class="trial-faq">
                 <div class="trial-faq__q">犬にも猫にも使えますか？</div>
                 <div class="trial-faq__a">はい、4品すべて犬・猫どちらにもお使いいただけます。多頭飼いのご家庭にも好評です。</div>
             </div>
@@ -347,7 +352,8 @@
                     <span class="trial-final__unit">円（税込・送料無料）</span>
                 </div>
                 <a href="{{ trial_cta_url }}" class="trial-cta-btn">{{ trial_cta_label }}</a>
-                <p class="trial-cta-note">会員登録無料 / 1アカウントにつき1回限り / クリックポスト発送</p>
+                <p class="trial-cta-note">会員登録無料 / お一人様1回・1セット限り / クリックポスト発送</p>
+                <p class="trial-limit-note">※本セットは<strong>お一人様1回・1セットまで</strong>です。2セット以上のご注文はお受けできません。</p>
             </div>
         </div>
     </section>

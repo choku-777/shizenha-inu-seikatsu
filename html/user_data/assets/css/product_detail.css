@@ -560,6 +560,22 @@
     margin: 0;
 }
 
+/* トライアルセット: お一人様1回・1セット限りの注意書き（赤枠） */
+.purchase-card__limit-note {
+    margin: 12px 0 0;
+    padding: 9px 12px;
+    border: 1px solid #C0392B;
+    background: #FDF0EE;
+    border-radius: 6px;
+    color: #C0392B;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    text-align: center;
+}
+.purchase-card__limit-note strong {
+    font-weight: 700;
+}
+
 .purchase-card__cart-btn {
     width: 100%;
     padding: 14px 0;

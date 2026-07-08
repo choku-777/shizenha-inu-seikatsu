@@ -220,6 +220,22 @@
     margin: 8px 0 0;
 }
 
+/* お一人様1セット限りの注意書き（赤枠） */
+.trial-limit-note {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    border: 1px solid var(--trial-red);
+    background: var(--trial-red-light);
+    border-radius: 6px;
+    color: var(--trial-red);
+    font-size: 12.5px;
+    line-height: 1.6;
+    text-align: center;
+}
+.trial-limit-note strong {
+    font-weight: 700;
+}
+
 /* セット全体フラットレイ */
 .trial-hero__flatlay {
     width: 100%;

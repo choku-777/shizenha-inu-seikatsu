@@ -6,7 +6,7 @@
 {% set body_class = 'product_page product_detail_page' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('assets/css/product_detail.css', 'user_data') }}?v=20260521c">
+    <link rel="stylesheet" href="{{ asset('assets/css/product_detail.css', 'user_data') }}?v=20260706">
     <style>
         /* slick slider */
         .slick-slider { margin-bottom: 0; }
@@ -451,6 +451,11 @@
                                         {{ form_errors(form.quantity) }}
                                     </div>
                                 </div>
+
+                                {# トライアルセット(id=19): お一人様1回・1セット限りの注意書き #}
+                                {% if Product.id == 19 %}
+                                    <p class="purchase-card__limit-note">※本セットは<strong>お一人様1回・1セットまで</strong>です。2セット以上のご注文はお受けできません。</p>
+                                {% endif %}
 
                                 {# カートボタン #}
                                 <button type="submit" class="purchase-card__cart-btn add-cart">
