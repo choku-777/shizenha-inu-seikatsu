@@ -22,15 +22,8 @@ file that was distributed with this source code.
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WGS98VLQ');</script>
     <!-- End Google Tag Manager -->
-
-    {# GTM 経由の計測が確認できるまでの併走用。確認後に削除する #}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZG4G22YXH"></script>
-    <script>
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TZG4G22YXH');
-    </script>
+    {# GA4(G-TZG4G22YXH) は GTM の「GA4 - 設定」タグから配信する。
+       ここに gtag.js を併記すると二重計測になるため置かない。 #}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="eccube-csrf-token" content="{{ csrf_token(constant('Eccube\\Common\\Constant::TOKEN_NAME')) }}">
