@@ -33,6 +33,7 @@ class ProcessedStore
             throw new \RuntimeException('記録用のフォルダを作れません');
         }
         $this->lock = fopen($this->dir.'/lock', 'c');
+        @chmod($this->dir.'/lock', 0600);
         if (!$this->lock || !flock($this->lock, LOCK_EX | LOCK_NB)) {
             return false;
         }
@@ -81,7 +82,8 @@ class ProcessedStore
 
         $tmp = $this->dir.'/state.json.tmp';
         $json = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        if ($json === false || file_put_contents($tmp, $json, LOCK_EX) !== strlen($json) || !rename($tmp, $this->dir.'/state.json')) {
+        // 原稿の本文などを含むため、本人以外は読めない権限で書く（作り直すたびに権限が緩まないように）
+        if ($json === false || file_put_contents($tmp, $json, LOCK_EX) !== strlen($json) || !chmod($tmp, 0600) || !rename($tmp, $this->dir.'/state.json')) {
             throw new \RuntimeException('処理済みの記録を保存できません');
         }
 
