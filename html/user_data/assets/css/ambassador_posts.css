@@ -51,21 +51,52 @@
     margin-bottom: 20px;
 }
 
-/* 横スクロールで並べる（スマホは指で送れる） */
+/* 横スクロールで並べる（スマホは指で送れる）。傾けたカードが切れないよう上下に余白 */
 .amb__list {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     margin: 0;
-    padding: 0 0 12px;
+    padding: 14px 6px 22px;
     list-style: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 }
 
+/* ポラロイド写真風：白い縁と影、1枚ずつ少し傾ける。マウスを乗せるとまっすぐ浮き上がる */
 .amb__card {
     flex: 0 0 180px;
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 8px 12px;
+    background: var(--color-white, #FFFFFF);
+    border-radius: 4px;
+    box-shadow: 0 6px 18px rgba(61, 43, 31, 0.14);
+    transform: rotate(-1.6deg);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.amb__card:nth-child(3n+2) {
+    transform: rotate(1.2deg);
+}
+
+.amb__card:nth-child(3n) {
+    transform: rotate(-0.8deg);
+}
+
+.amb__card:hover,
+.amb__card:focus-within {
+    transform: rotate(0) translateY(-4px);
+    box-shadow: 0 12px 24px rgba(61, 43, 31, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .amb__card,
+    .amb__thumb img {
+        transition: none;
+    }
 }
 
 .amb__thumb {
@@ -75,7 +106,7 @@
     aspect-ratio: 9 / 16;
     padding: 0;
     border: 0;
-    border-radius: 12px;
+    border-radius: 2px;
     overflow: hidden;
     background: var(--color-bg-alt, #F0E8DA);
     cursor: pointer;
@@ -136,8 +167,34 @@
     color: var(--color-text, #3D2B1F);
 }
 
+/* 掲載から14日以内 */
+.amb__new {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--color-primary-dark, #A67520);
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+}
+
+/* 商品詳細で、今見ている商品の動画 */
+.amb__current {
+    margin-top: 8px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-green-light, #EAF0E7);
+    color: var(--color-green-dark, #4E6B44);
+    font-size: 11px;
+    font-weight: 700;
+}
+
 .amb__dog {
-    margin: 10px 0 2px;
+    margin: 8px 0 2px;
     font-size: 14px;
     font-weight: 700;
 }
@@ -166,6 +223,109 @@
     font-size: 12px;
     line-height: 1.8;
     color: var(--color-text-light, #7A6B5D);
+}
+
+/* 一覧の最後のアンバサダー募集カード */
+.amb__card.amb__card--recruit {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.amb__card.amb__card--recruit:hover,
+.amb__card.amb__card--recruit:focus-within {
+    transform: translateY(-4px);
+    box-shadow: none;
+}
+
+.amb__recruit {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    padding: 20px 16px;
+    border: 2px dashed var(--color-primary, #C8963E);
+    border-radius: 6px;
+    background: #FFFBF2;
+    color: var(--color-text, #3D2B1F);
+    text-align: center;
+    text-decoration: none;
+}
+
+.amb__recruit-icon {
+    color: var(--color-primary, #C8963E);
+}
+
+.amb__recruit-title {
+    font-family: var(--font-heading, serif);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.amb__recruit-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+.amb__recruit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    line-height: 1.4;
+    background: var(--color-green-dark, #4E6B44);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* スマホだけ：一覧の下の横長の募集案内 */
+.amb__recruit-banner {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .amb__recruit-banner {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 8px;
+        padding: 14px 16px;
+        border: 2px dashed var(--color-primary, #C8963E);
+        border-radius: 8px;
+        background: #FFFBF2;
+        color: var(--color-primary, #C8963E);
+        text-decoration: none;
+    }
+
+    .amb__recruit-banner-body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .amb__recruit-banner-title {
+        color: var(--color-text, #3D2B1F);
+        font-family: var(--font-heading, serif);
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .amb__recruit-banner-link {
+        color: var(--color-green-dark, #4E6B44);
+        font-size: 12px;
+        font-weight: 700;
+    }
 }
 
 /* 動画の小窓 */

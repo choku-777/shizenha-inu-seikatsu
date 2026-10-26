@@ -3,20 +3,24 @@
     ※管理画面のブロック登録はしていない。各ページから include して使う。
     渡す値:
       ambassador_variant    'top' | 'trial' | 'product'（見出しと文言が変わる）
-      ambassador_product_id 商品ID（商品詳細でその商品の投稿だけにする。ほかは null）
+      ambassador_product_id 商品ID（商品詳細では、その商品の投稿を先頭に並べて「この商品」の印を付ける。ほかは null）
       ambassador_limit      最大件数
     掲載できる投稿が無いときは何も出さない。
     サムネイル表示のみで、押したときに初めて Instagram / TikTok の埋め込みを読み込む。
+    一覧の最後にアンバサダー募集のカードを置く（件数が少なくても列が埋まり、投稿を増やす導線にもなる）。
 #}
 {% set amb_variant = ambassador_variant|default('top') %}
-{% set amb_posts = ambassador_posts(ambassador_product_id|default(null), ambassador_limit|default(6)) %}
+{% set amb_current_id = ambassador_product_id|default(null) %}
+{% set amb_posts = ambassador_posts(amb_current_id, ambassador_limit|default(6)) %}
+{% set amb_recruit_url = 'https://affiliate.tairiku-tsusho.co.jp/' %}
 {% if amb_posts is not empty %}
-<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261026', 'user_data') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261027', 'user_data') }}">
 <section class="amb amb--{{ amb_variant }}" aria-labelledby="amb-title-{{ amb_variant }}">
     <div class="amb__inner">
         <p class="amb__eyebrow">AMBASSADORS</p>
         {% if amb_variant == 'product' %}
-            <h2 class="amb__title" id="amb-title-{{ amb_variant }}">この商品を食べている子たち</h2>
+            <h2 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽを食べている子たち</h2>
+            <p class="amb__lead">アンバサダーのみなさんが、うちの子のごはんの時間を動画で届けてくれています。</p>
         {% elseif amb_variant == 'trial' %}
             <h2 class="amb__title" id="amb-title-{{ amb_variant }}">アンバサダーさんの、ごはんの時間</h2>
             <p class="amb__lead">うましっぽを試したアンバサダーのみなさんが、動画で様子を届けてくれています。</p>
@@ -29,32 +33,52 @@
             {% for post in amb_posts %}
                 {% set amb_dog = [post.dog_breed, post.dog_age]|filter(v => v)|join('・') %}
                 {% set amb_tags = [post.dog_size_label, post.dog_stage_label]|filter(v => v)|join('・') %}
-                {% set amb_product_url = post.product_id ? url('product_detail', {'id': post.product_id}) : '' %}
+                {% set amb_is_current = amb_current_id and post.product_id == amb_current_id %}
+                {% set amb_product_url = (post.product_id and not amb_is_current) ? url('product_detail', {'id': post.product_id}) : '' %}
                 <li class="amb__card">
                     <button type="button" class="amb__thumb"
                             data-amb-embed="{{ post.embed_url }}"
                             data-amb-origin="{{ post.url }}"
                             data-amb-platform="{{ post.platform_label }}"
                             data-amb-title="{{ amb_dog ?: 'アンバサダーの動画' }}"
-                            data-amb-product-url="{{ amb_variant == 'product' ? '' : amb_product_url }}"
+                            data-amb-product-url="{{ amb_product_url }}"
                             data-amb-product-name="{{ post.product_name }}"
                             data-amb-product-id="{{ post.product_id }}"
                             aria-label="{{ amb_dog ?: 'アンバサダー' }}の動画を再生（{{ post.platform_label }}）">
                         <img src="{{ post.thumbnail_url }}" alt="" width="360" height="640" loading="lazy">
                         <span class="amb__pr">PR</span>
                         <span class="amb__platform">{{ post.platform_label }}</span>
+                        {% if post.is_new|default(false) %}<span class="amb__new">NEW</span>{% endif %}
                         <span class="amb__play" aria-hidden="true">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                         </span>
                     </button>
+                    {% if amb_is_current %}<span class="amb__current">この商品</span>{% endif %}
                     {% if amb_dog %}<p class="amb__dog">{{ amb_dog }}</p>{% endif %}
                     {% if amb_tags %}<p class="amb__tags">{{ amb_tags }}</p>{% endif %}
-                    {% if amb_variant != 'product' and amb_product_url and post.product_name %}
+                    {% if amb_product_url and post.product_name %}
                         <a class="amb__product" href="{{ amb_product_url }}">{{ post.product_name }}を見る</a>
                     {% endif %}
                 </li>
             {% endfor %}
+            <li class="amb__card amb__card--recruit">
+                <a class="amb__recruit" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
+                    <svg class="amb__recruit-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="10" r="1.8"/><circle cx="10" cy="6.5" r="1.8"/><circle cx="14" cy="6.5" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 12c-3 0-5 3.2-5 5.2 0 1.6 1.4 2.3 2.8 2.3 1 0 1.5-.5 2.2-.5s1.2.5 2.2.5c1.4 0 2.8-.7 2.8-2.3 0-2-2-5.2-5-5.2z"/></svg>
+                    <span class="amb__recruit-title">あなたのわんちゃんも<br>参加しませんか？</span>
+                    <span class="amb__recruit-text">サンプルを試して、SNSで感想を投稿してくださるアンバサダーを募集しています</span>
+                    <span class="amb__recruit-button">アンバサダーについて見る</span>
+                </a>
+            </li>
         </ul>
+
+        {# スマホでは一覧の最後が画面外に隠れやすいので、一覧の下にも募集の案内を置く #}
+        <a class="amb__recruit-banner" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="10" r="1.8"/><circle cx="10" cy="6.5" r="1.8"/><circle cx="14" cy="6.5" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 12c-3 0-5 3.2-5 5.2 0 1.6 1.4 2.3 2.8 2.3 1 0 1.5-.5 2.2-.5s1.2.5 2.2.5c1.4 0 2.8-.7 2.8-2.3 0-2-2-5.2-5-5.2z"/></svg>
+            <span class="amb__recruit-banner-body">
+                <span class="amb__recruit-banner-title">あなたのわんちゃんも参加しませんか？</span>
+                <span class="amb__recruit-banner-link">アンバサダーについて見る</span>
+            </span>
+        </a>
 
         <p class="amb__note">※アンバサダーによるPR投稿を、ご本人の同意を得て掲載しています。動画は各SNSの埋め込み機能で表示します。</p>
     </div>

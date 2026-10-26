@@ -7,7 +7,8 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
- * テンプレートからアンバサダー投稿の一覧を使う: {{ ambassador_posts(商品ID or null, 件数) }}
+ * テンプレートからアンバサダー投稿の一覧を使う: {{ ambassador_posts(商品ID or null, 件数, その商品だけにするか) }}
+ * 商品IDを渡すと、その商品の投稿を先頭に並べる。
  * 取得で何が起きてもページ表示は止めない（空を返して欄ごと非表示にする）。
  */
 class AmbassadorPostExtension extends AbstractExtension
@@ -23,10 +24,10 @@ class AmbassadorPostExtension extends AbstractExtension
         ];
     }
 
-    public function posts(?int $productId = null, int $limit = 6): array
+    public function posts(?int $productId = null, int $limit = 6, bool $onlyProduct = false): array
     {
         try {
-            return $this->provider->list($productId, $limit);
+            return $this->provider->list($productId, $limit, $onlyProduct);
         } catch (\Throwable $e) {
             log_error('[AmbassadorPosts] 表示用の一覧を作れませんでした', ['error' => $e->getMessage()]);
 

@@ -15,9 +15,9 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class AmbassadorPostProvider
 {
-    private const CACHE_KEY = 'customize.ambassador_posts.v2';
+    private const CACHE_KEY = 'customize.ambassador_posts.v3';
 
-    private const LAST_GOOD_KEY = 'customize.ambassador_posts.last_good.v2';
+    private const LAST_GOOD_KEY = 'customize.ambassador_posts.last_good.v3';
 
     private const TTL = 3600;
 
@@ -28,6 +28,9 @@ class AmbassadorPostProvider
 
     private const MAX_BYTES = 1024 * 1024;
 
+    /** 掲載からこの日数以内の投稿に「NEW」を付ける */
+    private const NEW_DAYS = 14;
+
     private ?array $posts = null;
 
     public function __construct(private CacheItemPoolInterface $cache)
@@ -35,13 +38,19 @@ class AmbassadorPostProvider
     }
 
     /**
-     * 表示用の投稿一覧。$productId を渡すとその商品の投稿だけ。
+     * 表示用の投稿一覧。
+     * $productId を渡すと、その商品の投稿を先頭に並べる（$onlyProduct = true ならその商品の投稿だけ）。
      */
-    public function list(?int $productId = null, int $limit = 6): array
+    public function list(?int $productId = null, int $limit = 6, bool $onlyProduct = false): array
     {
         $posts = $this->all();
         if ($productId !== null) {
-            $posts = array_values(array_filter($posts, fn (array $p) => $p['product_id'] === $productId));
+            if ($onlyProduct) {
+                $posts = array_values(array_filter($posts, fn (array $p) => $p['product_id'] === $productId));
+            } else {
+                // 同じグループの中は元の並び（動画優先・管理画面の表示順）を保つ
+                usort($posts, fn (array $a, array $b) => (int) ($b['product_id'] === $productId) <=> (int) ($a['product_id'] === $productId));
+            }
         }
 
         return array_slice($posts, 0, max(0, $limit));
@@ -156,10 +165,20 @@ class AmbassadorPostProvider
         $text = fn ($v, int $max) => is_string($v) && trim($v) !== '' ? mb_substr(trim($v), 0, $max) : null;
         $productId = filter_var($raw['product_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
 
+        $isNew = false;
+        if (is_string($raw['approved_at'] ?? null)) {
+            try {
+                $isNew = new \DateTimeImmutable($raw['approved_at']) > new \DateTimeImmutable('-'.self::NEW_DAYS.' days');
+            } catch (\Exception $e) {
+                $isNew = false;
+            }
+        }
+
         return [
             'platform' => $platform,
             'platform_label' => $label,
             'is_video' => $isVideo,
+            'is_new' => $isNew,
             'url' => $url,
             'embed_url' => $embed,
             'thumbnail_url' => $base.$thumb,
