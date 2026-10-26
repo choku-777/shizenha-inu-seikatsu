@@ -14,7 +14,7 @@
 {% set amb_posts = ambassador_posts(amb_current_id, ambassador_limit|default(6)) %}
 {% set amb_recruit_url = 'https://affiliate.tairiku-tsusho.co.jp/' %}
 {% if amb_posts is not empty %}
-<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261027', 'user_data') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261027b', 'user_data') }}">
 <section class="amb amb--{{ amb_variant }}" aria-labelledby="amb-title-{{ amb_variant }}">
     <div class="amb__inner">
         <p class="amb__eyebrow">AMBASSADORS</p>
@@ -29,6 +29,14 @@
             <p class="amb__lead">アンバサダーのみなさんが、うちの子のごはんの時間を動画で届けてくれています。</p>
         {% endif %}
 
+        <div class="amb__scroller">
+        {# PC だけ表示する左右の送りボタン（スマホは指で横に送る） #}
+        <button type="button" class="amb__arrow amb__arrow--prev" aria-label="前の動画を表示" hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="amb__arrow amb__arrow--next" aria-label="次の動画を表示" hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
         <ul class="amb__list">
             {% for post in amb_posts %}
                 {% set amb_dog = [post.dog_breed, post.dog_age]|filter(v => v)|join('・') %}
@@ -70,6 +78,7 @@
                 </a>
             </li>
         </ul>
+        </div>
 
         {# スマホでは一覧の最後が画面外に隠れやすいので、一覧の下にも募集の案内を置く #}
         <a class="amb__recruit-banner" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
@@ -105,6 +114,25 @@
     if (!section || !dialog) {
         return;
     }
+
+    // 左右の送りボタン：はみ出しているときだけ出し、端に着いた側は隠す
+    var list = section.querySelector('.amb__list');
+    var prev = section.querySelector('.amb__arrow--prev');
+    var next = section.querySelector('.amb__arrow--next');
+    function updateArrows() {
+        var max = list.scrollWidth - list.clientWidth;
+        prev.hidden = list.scrollLeft <= 4;
+        next.hidden = list.scrollLeft >= max - 4;
+    }
+    function slide(direction) {
+        list.scrollBy({ left: direction * Math.max(200, list.clientWidth * 0.8), behavior: 'smooth' });
+    }
+    prev.addEventListener('click', function () { slide(-1); });
+    next.addEventListener('click', function () { slide(1); });
+    list.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    window.addEventListener('load', updateArrows);
+    updateArrows();
     if (typeof dialog.showModal !== 'function') {
         // 小窓（dialog）が使えない古いブラウザでは、元の投稿を新しいタブで開く
         section.addEventListener('click', function (e) {

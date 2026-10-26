@@ -559,7 +559,7 @@
     </div>
 
     {# ===== アンバサダーのSNS動画（全商品共通の一覧。この商品の投稿を先頭に。無いときは何も出ない） ===== #}
-    {{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'product', 'ambassador_product_id': Product.id, 'ambassador_limit': 12}) }}
+    {{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'product', 'ambassador_product_id': Product.id, 'ambassador_limit': 20}) }}
 
     {# ===== 与え方のポイント ===== #}
     {# 以前ここにあった静的な「お客様の声」（実在しない文面）は削除。実際の声は上のアンバサダー動画で紹介する #}
