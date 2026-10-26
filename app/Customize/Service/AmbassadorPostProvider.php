@@ -166,9 +166,12 @@ class AmbassadorPostProvider
         $productId = filter_var($raw['product_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
 
         $isNew = false;
+        $approvedAt = null;
         if (is_string($raw['approved_at'] ?? null)) {
             try {
-                $isNew = new \DateTimeImmutable($raw['approved_at']) > new \DateTimeImmutable('-'.self::NEW_DAYS.' days');
+                $approved = new \DateTimeImmutable($raw['approved_at']);
+                $isNew = $approved > new \DateTimeImmutable('-'.self::NEW_DAYS.' days');
+                $approvedAt = $approved->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d');
             } catch (\Exception $e) {
                 $isNew = false;
             }
@@ -179,6 +182,7 @@ class AmbassadorPostProvider
             'platform_label' => $label,
             'is_video' => $isVideo,
             'is_new' => $isNew,
+            'approved_at' => $approvedAt, // 掲載日（Y-m-d）。お知らせ自動更新の材料に使う
             'url' => $url,
             'embed_url' => $embed,
             'thumbnail_url' => $base.$thumb,

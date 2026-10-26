@@ -6,36 +6,49 @@
     <div class="container">
         <h2 class="section-title">お知らせ</h2>
         
+        {# 最新3件を表示し、それより前（最大10件まで）は「過去のお知らせ」を開いて見られるようにする。
+           お知らせは自動更新（Dots）で増えるため、トップが長くならないようにしている #}
         <div class="news-list">
-            {% for News in NewsList %}
-                {# 最新の5件のみ表示 #}
-                {% if loop.index <= 5 %}
-                    <div class="news-item">
-                        <div class="news-item__head">
-                            <div class="news-date">{{ News.publish_date|date('Y.m.d') }}</div>
-                            <div class="news-title">
-                                {% if News.url %}
-                                    <a href="{{ News.url }}" {% if News.link_method == '1' %}target="_blank"{% endif %}>
-                                        {{ News.title }}
-                                    </a>
-                                {% else %}
-                                    <span>{{ News.title }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% if News.description %}
-                            <div class="news-description">{{ News.description|raw|nl2br }}</div>
-                        {% endif %}
-                    </div>
-                {% endif %}
+            {% for News in NewsList|slice(0, 3) %}
+                {{ _self.news_item(News) }}
             {% else %}
                 <div class="news-item">
                     <div class="news-title" style="text-align: center; color: var(--color-text-light);">現在お知らせはありません。</div>
                 </div>
             {% endfor %}
         </div>
+        {% if NewsList|length > 3 %}
+            <details class="news-more">
+                <summary class="news-more__toggle">過去のお知らせを見る</summary>
+                <div class="news-list">
+                    {% for News in NewsList|slice(3, 7) %}
+                        {{ _self.news_item(News) }}
+                    {% endfor %}
+                </div>
+            </details>
+        {% endif %}
     </div>
 </section>
 
 {# アンバサダーのSNS動画：目立つようお知らせの直後に置く（掲載できる投稿が無いときは何も出ない） #}
 {{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'top', 'ambassador_product_id': null, 'ambassador_limit': 20}) }}
+
+{% macro news_item(News) %}
+    <div class="news-item">
+        <div class="news-item__head">
+            <div class="news-date">{{ News.publish_date|date('Y.m.d') }}</div>
+            <div class="news-title">
+                {% if News.url %}
+                    <a href="{{ News.url }}" {% if News.link_method == '1' %}target="_blank"{% endif %}>
+                        {{ News.title }}
+                    </a>
+                {% else %}
+                    <span>{{ News.title }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if News.description %}
+            <div class="news-description">{{ News.description|raw|nl2br }}</div>
+        {% endif %}
+    </div>
+{% endmacro %}

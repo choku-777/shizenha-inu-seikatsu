@@ -1019,3 +1019,30 @@
 .contact_page .ec-halfInput input {
     flex: 1;
 }
+
+/* お知らせ：最新3件より前は「過去のお知らせを見る」で開く（Block/news.twig） */
+.news-more {
+    margin-top: 16px;
+}
+
+.news-more__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 1px solid var(--color-border, #E8DCC8);
+    border-radius: 999px;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-text, #3D2B1F);
+    font-size: 14px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.news-more__toggle::-webkit-details-marker {
+    display: none;
+}
+
+.news-more[open] .news-more__toggle {
+    margin-bottom: 16px;
+}

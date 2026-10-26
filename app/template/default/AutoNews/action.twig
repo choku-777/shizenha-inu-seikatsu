@@ -1,0 +1,61 @@
+{#
+    お知らせ自動更新：Discord の「非公開にする／公開する」リンクの確認画面（社内用）。
+    署名は URL の # 以降にあり、ボタンを押したときだけ POST で送る（サーバーのログに残さないため）。
+    サイトの共通レイアウトは使わない（検索にも出さない）。
+#}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <title>お知らせの{{ action == 'publish' ? '公開' : '非公開' }}｜うましっぽ</title>
+    <style>
+        body { margin: 0; background: #FBF8F3; color: #3D2B1F; font-family: -apple-system, "Hiragino Sans", sans-serif; }
+        main { max-width: 560px; margin: 0 auto; padding: 32px 16px; }
+        h1 { font-size: 20px; margin: 0 0 16px; }
+        .card { background: #fff; border: 1px solid #E8DCC8; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .title { font-weight: 700; margin: 0 0 8px; }
+        .body { margin: 0; line-height: 1.8; font-size: 14px; }
+        .state { font-size: 13px; color: #7A6B5D; margin: 0 0 12px; }
+        .message { font-weight: 700; }
+        .note { font-size: 13px; color: #7A6B5D; }
+        button { min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: #4E6B44; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; }
+        button.hide { background: #8C3B2E; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>お知らせの{{ action == 'publish' ? '公開' : '非公開' }}</h1>
+    {% if message %}<p class="message">{{ message }}</p>{% endif %}
+    {% if News %}
+        <div class="card">
+            <p class="state">現在：{{ News.visible ? '公開中' : '非公開（下書き）' }}　／　お知らせID {{ News.id }}</p>
+            <p class="title">{{ News.title }}</p>
+            {% if News.description %}<p class="body">{{ News.description|raw|nl2br }}</p>{% endif %}
+        </div>
+    {% elseif not message %}
+        <form method="post" id="auto-news-form">
+            <input type="hidden" name="signature" id="auto-news-signature" value="">
+            <p class="note">Discord の通知のお知らせを{{ action == 'publish' ? '公開' : '非公開に' }}します。内容はボタンを押したあとに表示されます。</p>
+            {% if action == 'publish' %}
+                <button type="submit">このお知らせを公開する</button>
+            {% else %}
+                <button type="submit" class="hide">このお知らせを非公開にする</button>
+            {% endif %}
+        </form>
+        <script>
+            (function () {
+                var signature = (location.hash || '').replace(/^#/, '');
+                document.getElementById('auto-news-signature').value = signature;
+                // 署名を履歴やアドレス欄に残さない
+                if (history.replaceState) {
+                    history.replaceState(null, '', location.pathname);
+                }
+            })();
+        </script>
+    {% endif %}
+</main>
+</body>
+</html>
