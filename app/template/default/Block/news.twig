@@ -36,3 +36,6 @@
         </div>
     </div>
 </section>
+
+{# アンバサダーのSNS動画：目立つようお知らせの直後に置く（掲載できる投稿が無いときは何も出ない） #}
+{{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'top', 'ambassador_product_id': null, 'ambassador_limit': 20}) }}
