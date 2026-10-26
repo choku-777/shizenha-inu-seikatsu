@@ -45,7 +45,11 @@ file that was distributed with this source code.
     {% if Page.meta_robots is not empty %}
         <meta name="robots" content="{{ Page.meta_robots }}">
     {% endif %}
-    <link rel="icon" href="{{ asset('assets/img/common/favicon.ico', 'user_data') }}">
+    {# ファビコン：ico（複数サイズ入り）＋PNG、iPhone のホーム画面用、Android 用 #}
+    <link rel="icon" href="{{ asset('assets/img/favicon/favicon.ico', 'user_data') }}?v=20261027" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon/favicon-32.png', 'user_data') }}?v=20261027">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/img/favicon/favicon-192.png', 'user_data') }}?v=20261027">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicon/favicon-180.png', 'user_data') }}?v=20261027">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&display=swap">
