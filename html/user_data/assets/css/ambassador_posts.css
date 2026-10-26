@@ -1,0 +1,270 @@
+/* アンバサダーのSNS動画（Block/ambassador_posts.twig） */
+
+.amb {
+    padding: 56px 0;
+    background: var(--color-white, #FFFFFF);
+    border-top: 1px solid var(--color-border, #E8DCC8);
+    border-bottom: 1px solid var(--color-border, #E8DCC8);
+    color: var(--color-text, #3D2B1F);
+}
+
+.amb--trial,
+.amb--product {
+    background: transparent;
+    border: 0;
+    padding: 40px 0;
+}
+
+.amb__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.amb__eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--color-green-dark, #4E6B44);
+}
+
+.amb__title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading, serif);
+    font-size: 28px;
+    line-height: 1.4;
+}
+
+.amb--product .amb__title {
+    font-size: 22px;
+}
+
+.amb__lead {
+    margin: 0 0 24px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+.amb--product .amb__title {
+    margin-bottom: 20px;
+}
+
+/* 横スクロールで並べる（スマホは指で送れる） */
+.amb__list {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0 0 12px;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.amb__card {
+    flex: 0 0 180px;
+    scroll-snap-align: start;
+}
+
+.amb__thumb {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-bg-alt, #F0E8DA);
+    cursor: pointer;
+}
+
+.amb__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.amb__thumb:hover img {
+    transform: scale(1.03);
+}
+
+.amb__thumb:focus-visible {
+    outline: 3px solid var(--color-green, #6B8F5E);
+    outline-offset: 2px;
+}
+
+.amb__pr,
+.amb__platform {
+    position: absolute;
+    top: 8px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.amb__pr {
+    left: 8px;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-text, #3D2B1F);
+    font-weight: 700;
+}
+
+.amb__platform {
+    right: 8px;
+    background: rgba(61, 43, 31, 0.85);
+    color: #FFFFFF;
+}
+
+/* 再生できることを示す小さな印（中央の大きなボタンは置かない＝表紙の再生ボタンと重ならないように） */
+.amb__play {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-text, #3D2B1F);
+}
+
+.amb__dog {
+    margin: 10px 0 2px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.amb__tags {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+.amb__product {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-green-dark, #4E6B44);
+    text-decoration: none;
+}
+
+.amb__product:hover {
+    text-decoration: underline;
+}
+
+.amb__note {
+    margin: 16px 0 0;
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+/* 動画の小窓 */
+.amb-dialog {
+    width: min(420px, calc(100vw - 24px));
+    max-height: calc(100vh - 24px);
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-text, #3D2B1F);
+}
+
+.amb-dialog::backdrop {
+    background: rgba(32, 24, 19, 0.72);
+}
+
+.amb-dialog__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px 4px 16px;
+}
+
+.amb-dialog__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.amb-dialog__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.amb-dialog__frame {
+    height: min(68vh, 640px);
+    background: var(--color-bg, #FBF8F3);
+}
+
+.amb-dialog__frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.amb-dialog__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px 16px;
+}
+
+.amb-dialog__product,
+.amb-dialog__origin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.amb-dialog__product {
+    background: var(--color-green-dark, #4E6B44);
+    color: #FFFFFF;
+}
+
+.amb-dialog__origin {
+    border: 1px solid var(--color-border, #E8DCC8);
+    color: var(--color-text, #3D2B1F);
+}
+
+.amb-dialog__product[hidden] {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .amb__card {
+        flex-basis: 200px;
+    }
+
+    .amb__title {
+        font-size: 32px;
+    }
+
+    .amb--product .amb__title {
+        font-size: 24px;
+    }
+}

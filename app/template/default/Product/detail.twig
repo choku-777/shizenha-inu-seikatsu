@@ -558,6 +558,9 @@
         </div>
     </div>
 
+    {# ===== アンバサダーのSNS動画（この商品の投稿だけ。無いときは何も出ない） ===== #}
+    {{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'product', 'ambassador_product_id': Product.id, 'ambassador_limit': 6}) }}
+
     {# ===== お客様の声 + 与え方のポイント ===== #}
     {# 注: お客様の声は将来レビュー機能プラグインで置き換え予定（現状は静的プレースホルダー）#}
     <div class="container">
