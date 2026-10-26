@@ -6,7 +6,7 @@
 {% set body_class = 'product_page product_detail_page' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('assets/css/product_detail.css', 'user_data') }}?v=20260706">
+    <link rel="stylesheet" href="{{ asset('assets/css/product_detail.css', 'user_data') }}?v=20261026">
     <style>
         /* slick slider */
         .slick-slider { margin-bottom: 0; }
@@ -561,29 +561,10 @@
     {# ===== アンバサダーのSNS動画（この商品の投稿だけ。無いときは何も出ない） ===== #}
     {{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'product', 'ambassador_product_id': Product.id, 'ambassador_limit': 6}) }}
 
-    {# ===== お客様の声 + 与え方のポイント ===== #}
-    {# 注: お客様の声は将来レビュー機能プラグインで置き換え予定（現状は静的プレースホルダー）#}
+    {# ===== 与え方のポイント ===== #}
+    {# 以前ここにあった静的な「お客様の声」（実在しない文面）は削除。実際の声は上のアンバサダー動画で紹介する #}
     <div class="container">
-        <div class="product-detail__voice-tips">
-            <section class="customer-voice">
-                <h3 class="section-title-sm">お客様の声</h3>
-                <div class="voice-card">
-                    <div class="voice-card__avatar"><i class="fas fa-paw"></i></div>
-                    <div class="voice-card__body">
-                        <p class="voice-card__title">食いつきが違います！</p>
-                        <p class="voice-card__text">シニア犬ですが、サクサク食べやすいようであっという間になくなります。</p>
-                        <p class="voice-card__author">トイプードル / 7歳</p>
-                    </div>
-                </div>
-                <div class="voice-card">
-                    <div class="voice-card__avatar"><i class="fas fa-paw"></i></div>
-                    <div class="voice-card__body">
-                        <p class="voice-card__title">低カロリーで安心してあげられます</p>
-                        <p class="voice-card__text">ダイエット中のご褒美にぴったり！手で割って少しずつ与えています。</p>
-                        <p class="voice-card__author">チワワ / 5歳</p>
-                    </div>
-                </div>
-            </section>
+        <div class="product-detail__voice-tips product-detail__voice-tips--single">
 
             <section class="usage-tips">
                 <h3 class="section-title-sm">与え方のポイント</h3>

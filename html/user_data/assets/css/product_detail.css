@@ -752,6 +752,11 @@
     border-radius: 12px;
 }
 
+/* 「お客様の声」を外し、与え方のポイントだけを全幅で表示する */
+.product-detail__voice-tips--single {
+    grid-template-columns: 1fr;
+}
+
 .section-title-sm {
     font-family: var(--font-body);
     font-size: 1.05rem;
