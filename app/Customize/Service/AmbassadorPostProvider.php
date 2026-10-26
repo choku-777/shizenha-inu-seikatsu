@@ -15,9 +15,9 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class AmbassadorPostProvider
 {
-    private const CACHE_KEY = 'customize.ambassador_posts.v1';
+    private const CACHE_KEY = 'customize.ambassador_posts.v2';
 
-    private const LAST_GOOD_KEY = 'customize.ambassador_posts.last_good.v1';
+    private const LAST_GOOD_KEY = 'customize.ambassador_posts.last_good.v2';
 
     private const TTL = 3600;
 
@@ -119,6 +119,10 @@ class AmbassadorPostProvider
             }
         }
 
+        // 動画（Instagram のリール・TikTok）を前、写真の投稿を後ろへ。
+        // 同じグループの中は管理画面の表示順のまま（usort は PHP 8 以降で安定ソート）
+        usort($posts, fn (array $a, array $b) => (int) $b['is_video'] <=> (int) $a['is_video']);
+
         return $posts;
     }
 
@@ -136,12 +140,14 @@ class AmbassadorPostProvider
             return null;
         }
 
-        if ($platform === 'instagram' && preg_match('#^https://www\.instagram\.com/(p|reel)/[A-Za-z0-9_-]+/$#', $url)) {
+        if ($platform === 'instagram' && preg_match('#^https://www\.instagram\.com/(p|reel)/[A-Za-z0-9_-]+/$#', $url, $m)) {
             $embed = $url.'embed/captioned/';
             $label = 'Instagram';
+            $isVideo = $m[1] === 'reel'; // /reel/ は動画。/p/ は写真または複数枚の投稿として扱う
         } elseif ($platform === 'tiktok' && preg_match('#^https://www\.tiktok\.com/@[A-Za-z0-9_.]+/video/\d+$#', $url) && preg_match('/^\d{1,30}$/', $postId)) {
             $embed = 'https://www.tiktok.com/embed/v2/'.$postId;
             $label = 'TikTok';
+            $isVideo = true;
         } else {
             return null;
         }
@@ -153,6 +159,7 @@ class AmbassadorPostProvider
         return [
             'platform' => $platform,
             'platform_label' => $label,
+            'is_video' => $isVideo,
             'url' => $url,
             'embed_url' => $embed,
             'thumbnail_url' => $base.$thumb,
