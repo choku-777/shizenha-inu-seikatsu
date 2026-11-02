@@ -77,6 +77,7 @@
     padding: 10px 0;
     display: block;
     position: relative;
+    white-space: nowrap;
 }
 
 .header-nav a:hover {
@@ -156,6 +157,7 @@
     align-items: center;
     gap: 6px;
     cursor: not-allowed;
+    white-space: nowrap;
 }
 
 .nav-soon-badge {
@@ -179,6 +181,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 }
 
 .header-trial-btn:hover {
@@ -394,5 +397,27 @@ body.drawer-open {
 
     .header-trial-btn {
         display: none;
+    }
+}
+
+/* PCナビが出る幅のうち狭め（タブレット横向き〜小さめのノートPC）：
+   メニューが2行に折り返さないよう、ロゴ・文字・間隔を少し詰める */
+@media (min-width: 993px) and (max-width: 1199px) {
+    .header-logo img {
+        height: 60px;
+    }
+
+    .header-nav > ul {
+        gap: 16px;
+    }
+
+    .header-nav a,
+    .nav-item-soon > span {
+        font-size: 0.85rem;
+    }
+
+    .header-trial-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
     }
 }
