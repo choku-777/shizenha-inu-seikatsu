@@ -1,0 +1,17 @@
+{#
+    うましっぽファミリー（アンバサダーのSNS動画の一覧ページ）  /user_data/umashippo-family
+    ※このテンプレートは Git 管理。管理画面「ページ管理」のコード欄で保存すると
+      この内容が空のひな形で上書きされるため、編集は必ずコードベースで行うこと。
+    中身は Block/ambassador_posts.twig（variant: family）で、トップ・商品詳細の動画欄と同じ仕組みを使う。
+    ?product=商品ID 付きで開くと、その商品で絞り込んだ状態になる（商品詳細の「この商品の動画をすべて見る」から）。
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'family_page' %}
+
+{% block main %}
+<nav class="family-breadcrumb" aria-label="現在の場所" style="max-width: 1200px; margin: 0 auto; padding: 20px 16px 0; font-size: 12px;">
+    <a href="{{ url('homepage') }}">トップ</a> ＞ <span aria-current="page">うましっぽファミリー</span>
+</nav>
+{{ include('Block/ambassador_posts.twig', {'ambassador_variant': 'family', 'ambassador_product_id': null, 'ambassador_limit': 50}) }}
+{% endblock %}

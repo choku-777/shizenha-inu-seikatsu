@@ -479,3 +479,246 @@
         font-size: 24px;
     }
 }
+
+/* 見出しの右の「すべて見る」（一覧ページ うましっぽファミリーへ） */
+.amb__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+}
+
+.amb__all {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-green-dark, #4E6B44);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.amb__all:hover {
+    text-decoration: underline;
+}
+
+.amb__all-text {
+    margin: 4px 0 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.amb__all-text a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-green-dark, #4E6B44);
+}
+
+/* 横スクロールの最後（募集カードの手前）の「もっと見る」カード */
+.amb__card.amb__card--more {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.amb__more {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    padding: 20px 16px;
+    border: 2px solid var(--color-green-dark, #4E6B44);
+    border-radius: 6px;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-green-dark, #4E6B44);
+    text-align: center;
+    text-decoration: none;
+}
+
+.amb__more-title {
+    font-family: var(--font-heading, serif);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.amb__more-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+/* ===== 一覧ページ（うましっぽファミリー） ===== */
+.amb--family {
+    padding: 40px 0 64px;
+    background: transparent;
+    border: 0;
+}
+
+.amb--family .amb__lead {
+    max-width: 640px;
+}
+
+.amb__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.amb__filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.amb__filter-label {
+    width: 48px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.amb__chip {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border, #E8DCC8);
+    border-radius: 999px;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-text, #3D2B1F);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.amb__chip[aria-pressed="true"] {
+    border-color: var(--color-green-dark, #4E6B44);
+    background: var(--color-green-dark, #4E6B44);
+    color: #FFFFFF;
+}
+
+.amb__chip:focus-visible,
+.amb__pager-button:focus-visible {
+    outline: 3px solid var(--color-green, #6B8F5E);
+    outline-offset: 2px;
+}
+
+.amb__count {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: var(--color-text-light, #7A6B5D);
+}
+
+.amb__empty {
+    margin: 24px 0;
+    font-size: 15px;
+}
+
+/* 格子状に並べる（スマホ2列 → タブレット3列 → PC4列） */
+.amb--family .amb__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+    padding: 20px 4px 8px;
+    overflow: visible;
+    scroll-snap-type: none;
+}
+
+.amb--family .amb__card {
+    align-items: stretch;
+}
+
+.amb__card[hidden] {
+    display: none;
+}
+
+.amb__pager {
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+}
+
+.amb__pager-button {
+    min-height: 48px;
+    padding: 0 32px;
+    border: 1px solid var(--color-green-dark, #4E6B44);
+    border-radius: 999px;
+    background: var(--color-white, #FFFFFF);
+    color: var(--color-green-dark, #4E6B44);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.amb__pager-button[hidden] {
+    display: none;
+}
+
+/* 一覧ページの募集案内は PC でも横長の帯で出す */
+.amb__recruit-banner.amb__recruit-banner--wide {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 40px;
+    padding: 16px;
+    border: 2px dashed var(--color-primary, #C8963E);
+    border-radius: 8px;
+    background: #FFFBF2;
+    color: var(--color-primary, #C8963E);
+    text-decoration: none;
+}
+
+.amb__recruit-banner--wide .amb__recruit-banner-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.amb__recruit-banner--wide .amb__recruit-banner-title {
+    color: var(--color-text, #3D2B1F);
+    font-family: var(--font-heading, serif);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.amb__recruit-banner--wide .amb__recruit-banner-link {
+    color: var(--color-green-dark, #4E6B44);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .amb--family .amb__list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 36px 28px;
+    }
+
+    .amb__recruit-banner.amb__recruit-banner--wide {
+        padding: 28px 32px;
+    }
+
+    .amb__recruit-banner--wide .amb__recruit-banner-title {
+        font-size: 20px;
+    }
+
+    .amb__recruit-banner--wide .amb__recruit-banner-link {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .amb--family .amb__list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

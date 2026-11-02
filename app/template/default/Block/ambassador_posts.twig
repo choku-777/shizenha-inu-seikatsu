@@ -1,35 +1,107 @@
 {#
-    アンバサダーのSNS動画（トップ・トライアルLP・商品詳細で共通）
+    アンバサダーのSNS動画（トップ・トライアルLP・商品詳細・うましっぽファミリーで共通）
     ※管理画面のブロック登録はしていない。各ページから include して使う。
     渡す値:
-      ambassador_variant    'top' | 'trial' | 'product'（見出しと文言が変わる）
+      ambassador_variant    'top' | 'trial' | 'product' | 'family'（見出しと文言が変わる）
       ambassador_product_id 商品ID（商品詳細では、その商品の投稿を先頭に並べて「この商品」の印を付ける。ほかは null）
       ambassador_limit      最大件数
-    掲載できる投稿が無いときは何も出さない。
+    掲載できる投稿が無いときは何も出さない（family は一覧ページそのものなので、空でも案内を出す）。
     サムネイル表示のみで、押したときに初めて Instagram / TikTok の埋め込みを読み込む。
-    一覧の最後にアンバサダー募集のカードを置く（件数が少なくても列が埋まり、投稿を増やす導線にもなる）。
+    top / trial / product は横スクロールで、最後にアンバサダー募集のカードを置く（件数が少なくても列が埋まり、投稿を増やす導線にもなる）。
+    family は格子状に並べ、商品・年代で絞り込める。商品詳細からは ?product=商品ID 付きで開き、その商品で絞り込んだ状態にする。
 #}
 {% set amb_variant = ambassador_variant|default('top') %}
+{% set amb_is_family = amb_variant == 'family' %}
 {% set amb_current_id = ambassador_product_id|default(null) %}
 {% set amb_posts = ambassador_posts(amb_current_id, ambassador_limit|default(6)) %}
 {% set amb_recruit_url = 'https://affiliate.tairiku-tsusho.co.jp/' %}
-{% if amb_posts is not empty %}
-<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261027b', 'user_data') }}">
+{% set amb_family_url = url('user_data', {'route': 'umashippo-family'}) %}
+{# 「もっと見る」カードは、ここに出し切れていない投稿があるときだけ置く #}
+{% set amb_has_more = not amb_is_family and ambassador_posts(null, 50)|length > amb_posts|length %}
+{# 商品詳細：その商品の動画があれば、その商品で絞り込んだ一覧へ。無ければ一覧の全体へ #}
+{% set amb_current_has_posts = amb_current_id and amb_posts|filter(p => p.product_id == amb_current_id)|length > 0 %}
+{% set amb_all_url = amb_current_has_posts ? amb_family_url ~ '?product=' ~ amb_current_id : amb_family_url %}
+{% if amb_posts is not empty or amb_is_family %}
+<link rel="stylesheet" href="{{ asset('assets/css/ambassador_posts.css?v=20261102', 'user_data') }}">
 <section class="amb amb--{{ amb_variant }}" aria-labelledby="amb-title-{{ amb_variant }}">
     <div class="amb__inner">
         <p class="amb__eyebrow">AMBASSADORS</p>
-        {% if amb_variant == 'product' %}
-            <h2 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽを食べている子たち</h2>
-            <p class="amb__lead">アンバサダーのみなさんが、うちの子のごはんの時間を動画で届けてくれています。</p>
-        {% elseif amb_variant == 'trial' %}
-            <h2 class="amb__title" id="amb-title-{{ amb_variant }}">アンバサダーさんの、ごはんの時間</h2>
-            <p class="amb__lead">うましっぽを試したアンバサダーのみなさんが、動画で様子を届けてくれています。</p>
+        {% if amb_is_family %}
+            <h1 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽファミリー</h1>
+            <p class="amb__lead">うましっぽを食べているわんちゃんたちの、ごはんの時間。アンバサダーのみなさんがSNSに投稿してくれた動画を集めました。</p>
         {% else %}
-            <h2 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽのある毎日</h2>
-            <p class="amb__lead">アンバサダーのみなさんが、うちの子のごはんの時間を動画で届けてくれています。</p>
+            <div class="amb__head">
+                <div>
+                    {% if amb_variant == 'product' %}
+                        <h2 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽを食べている子たち</h2>
+                    {% elseif amb_variant == 'trial' %}
+                        <h2 class="amb__title" id="amb-title-{{ amb_variant }}">アンバサダーさんの、ごはんの時間</h2>
+                    {% else %}
+                        <h2 class="amb__title" id="amb-title-{{ amb_variant }}">うましっぽのある毎日</h2>
+                    {% endif %}
+                </div>
+                {% if amb_variant != 'trial' %}
+                    <a class="amb__all" href="{{ amb_all_url }}">{{ amb_current_has_posts ? 'この商品の動画をすべて見る' : 'すべて見る' }}<span aria-hidden="true"> ›</span></a>
+                {% endif %}
+            </div>
+            {% if amb_variant == 'trial' %}
+                <p class="amb__lead">うましっぽを試したアンバサダーのみなさんが、動画で様子を届けてくれています。</p>
+            {% else %}
+                <p class="amb__lead">アンバサダーのみなさんが、うちの子のごはんの時間を動画で届けてくれています。</p>
+            {% endif %}
+        {% endif %}
+
+        {% if amb_is_family %}
+            {# 絞り込み：2件以上ある商品・年代だけボタンにする（1件だけのボタンが並ぶと寂しく見えるため）。
+               商品詳細から来たときの商品は、1件でもボタンにして選んだ状態にする #}
+            {% set amb_req_product = app.request.query.get('product')|default('') %}
+            {% set amb_req_product = amb_req_product matches '/^\\d{1,10}$/' ? amb_req_product : '' %}
+            {% set amb_product_counts = {} %}
+            {% set amb_product_names = {} %}
+            {% set amb_stage_counts = {} %}
+            {% for post in amb_posts %}
+                {% if post.product_id and post.product_name %}
+                    {% set amb_key = 'p' ~ post.product_id %}
+                    {% set amb_product_counts = amb_product_counts|merge({(amb_key): (amb_product_counts[amb_key]|default(0)) + 1}) %}
+                    {% set amb_product_names = amb_product_names|merge({(amb_key): post.product_name}) %}
+                {% endif %}
+                {% if post.dog_stage_label %}
+                    {% set amb_key = 's' ~ post.dog_stage_label %}
+                    {% set amb_stage_counts = amb_stage_counts|merge({(amb_key): (amb_stage_counts[amb_key]|default(0)) + 1}) %}
+                {% endif %}
+            {% endfor %}
+            {% set amb_product_chips = amb_product_counts|filter((c, k) => c >= 2 or k == 'p' ~ amb_req_product) %}
+            {% set amb_stage_chips = amb_stage_counts|filter(c => c >= 2) %}
+            {% if amb_product_chips is not empty or amb_stage_chips is not empty %}
+                <div class="amb__filters">
+                    {% if amb_product_chips is not empty %}
+                        <div class="amb__filter" role="group" aria-label="商品で絞り込む">
+                            <span class="amb__filter-label" aria-hidden="true">商品</span>
+                            <button type="button" class="amb__chip" data-amb-filter="product" data-amb-value="" aria-pressed="{{ amb_req_product and amb_product_chips['p' ~ amb_req_product] is defined ? 'false' : 'true' }}">すべて</button>
+                            {% for amb_key, amb_count in amb_product_chips %}
+                                <button type="button" class="amb__chip" data-amb-filter="product" data-amb-value="{{ amb_key|slice(1) }}" aria-pressed="{{ amb_key == 'p' ~ amb_req_product ? 'true' : 'false' }}">{{ amb_product_names[amb_key] }}</button>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if amb_stage_chips is not empty %}
+                        <div class="amb__filter" role="group" aria-label="年代で絞り込む">
+                            <span class="amb__filter-label" aria-hidden="true">年代</span>
+                            <button type="button" class="amb__chip" data-amb-filter="stage" data-amb-value="" aria-pressed="true">すべて</button>
+                            {% for amb_key, amb_count in amb_stage_chips %}
+                                <button type="button" class="amb__chip" data-amb-filter="stage" data-amb-value="{{ amb_key|slice(1) }}" aria-pressed="false">{{ amb_key|slice(1) }}</button>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <p class="amb__count" aria-live="polite"><span class="amb__count-num">{{ amb_posts|length }}</span>件の動画</p>
+            {% if amb_posts is empty %}
+                <p class="amb__empty">動画はただいま準備中です。もうしばらくお待ちください。</p>
+            {% endif %}
         {% endif %}
 
         <div class="amb__scroller">
+        {% if not amb_is_family %}
         {# PC だけ表示する左右の送りボタン（スマホは指で横に送る） #}
         <button type="button" class="amb__arrow amb__arrow--prev" aria-label="前の動画を表示" hidden>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
@@ -37,13 +109,14 @@
         <button type="button" class="amb__arrow amb__arrow--next" aria-label="次の動画を表示" hidden>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
         </button>
+        {% endif %}
         <ul class="amb__list">
             {% for post in amb_posts %}
                 {% set amb_dog = [post.dog_breed, post.dog_age]|filter(v => v)|join('・') %}
                 {% set amb_tags = [post.dog_size_label, post.dog_stage_label]|filter(v => v)|join('・') %}
                 {% set amb_is_current = amb_current_id and post.product_id == amb_current_id %}
                 {% set amb_product_url = (post.product_id and not amb_is_current) ? url('product_detail', {'id': post.product_id}) : '' %}
-                <li class="amb__card">
+                <li class="amb__card" data-amb-product="{{ post.product_id }}" data-amb-stage="{{ post.dog_stage_label }}">
                     <button type="button" class="amb__thumb"
                             data-amb-embed="{{ post.embed_url }}"
                             data-amb-origin="{{ post.url }}"
@@ -69,6 +142,15 @@
                     {% endif %}
                 </li>
             {% endfor %}
+            {% if amb_has_more %}
+            <li class="amb__card amb__card--more">
+                <a class="amb__more" href="{{ amb_family_url }}">
+                    <span class="amb__more-title">もっと見る</span>
+                    <span class="amb__more-text">うましっぽファミリーの動画をすべて見る</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if not amb_is_family %}
             <li class="amb__card amb__card--recruit">
                 <a class="amb__recruit" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
                     <svg class="amb__recruit-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="10" r="1.8"/><circle cx="10" cy="6.5" r="1.8"/><circle cx="14" cy="6.5" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 12c-3 0-5 3.2-5 5.2 0 1.6 1.4 2.3 2.8 2.3 1 0 1.5-.5 2.2-.5s1.2.5 2.2.5c1.4 0 2.8-.7 2.8-2.3 0-2-2-5.2-5-5.2z"/></svg>
@@ -77,11 +159,22 @@
                     <span class="amb__recruit-button">アンバサダーについて見る</span>
                 </a>
             </li>
+            {% endif %}
         </ul>
         </div>
 
-        {# スマホでは一覧の最後が画面外に隠れやすいので、一覧の下にも募集の案内を置く #}
-        <a class="amb__recruit-banner" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
+        {% if amb_is_family %}
+            {# 一度に並べるのは12件まで。残りはボタンで追加する（JS が無いときは全件そのまま見える） #}
+            <div class="amb__pager">
+                <button type="button" class="amb__pager-button" hidden>もっと見る</button>
+            </div>
+        {% elseif amb_variant == 'trial' %}
+            {# 申し込みの流れを切らないよう、控えめな文字リンクにして別タブで開く #}
+            <p class="amb__all-text"><a href="{{ amb_family_url }}" target="_blank" rel="noopener">ほかの子の動画も見る<span aria-hidden="true"> ›</span></a></p>
+        {% endif %}
+
+        {# スマホでは一覧の最後が画面外に隠れやすいので、一覧の下にも募集の案内を置く（family は PC でも出す） #}
+        <a class="amb__recruit-banner{{ amb_is_family ? ' amb__recruit-banner--wide' }}" href="{{ amb_recruit_url }}" target="_blank" rel="noopener">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="10" r="1.8"/><circle cx="10" cy="6.5" r="1.8"/><circle cx="14" cy="6.5" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 12c-3 0-5 3.2-5 5.2 0 1.6 1.4 2.3 2.8 2.3 1 0 1.5-.5 2.2-.5s1.2.5 2.2.5c1.4 0 2.8-.7 2.8-2.3 0-2-2-5.2-5-5.2z"/></svg>
             <span class="amb__recruit-banner-body">
                 <span class="amb__recruit-banner-title">あなたのわんちゃんも参加しませんか？</span>
@@ -115,11 +208,56 @@
         return;
     }
 
-    // 左右の送りボタン：はみ出しているときだけ出し、端に着いた側は隠す
     var list = section.querySelector('.amb__list');
+
+    // 一覧ページ（family）：商品・年代の絞り込みと、12件ずつの表示
+    var pagerButton = section.querySelector('.amb__pager-button');
+    if (pagerButton) {
+        var PAGE_SIZE = 12;
+        var shown = PAGE_SIZE;
+        var cards = Array.prototype.slice.call(list.querySelectorAll('.amb__card[data-amb-product]'));
+        var countNum = section.querySelector('.amb__count-num');
+        var chips = Array.prototype.slice.call(section.querySelectorAll('.amb__chip'));
+        function selected(type) {
+            var on = chips.filter(function (c) { return c.dataset.ambFilter === type && c.getAttribute('aria-pressed') === 'true'; })[0];
+            return on ? on.dataset.ambValue : '';
+        }
+        function render() {
+            var product = selected('product');
+            var stage = selected('stage');
+            var matched = cards.filter(function (card) {
+                return (!product || card.dataset.ambProduct === product) && (!stage || card.dataset.ambStage === stage);
+            });
+            cards.forEach(function (card) { card.hidden = true; });
+            matched.forEach(function (card, i) { card.hidden = i >= shown; });
+            countNum.textContent = matched.length;
+            pagerButton.hidden = matched.length <= shown;
+        }
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                chips.forEach(function (c) {
+                    if (c.dataset.ambFilter === chip.dataset.ambFilter) {
+                        c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+                    }
+                });
+                shown = PAGE_SIZE;
+                render();
+            });
+        });
+        pagerButton.addEventListener('click', function () {
+            shown += PAGE_SIZE;
+            render();
+        });
+        render();
+    }
+
+    // 左右の送りボタン：はみ出しているときだけ出し、端に着いた側は隠す
     var prev = section.querySelector('.amb__arrow--prev');
     var next = section.querySelector('.amb__arrow--next');
     function updateArrows() {
+        if (!prev || !next) {
+            return;
+        }
         var max = list.scrollWidth - list.clientWidth;
         prev.hidden = list.scrollLeft <= 4;
         next.hidden = list.scrollLeft >= max - 4;
@@ -127,8 +265,10 @@
     function slide(direction) {
         list.scrollBy({ left: direction * Math.max(200, list.clientWidth * 0.8), behavior: 'smooth' });
     }
-    prev.addEventListener('click', function () { slide(-1); });
-    next.addEventListener('click', function () { slide(1); });
+    if (prev && next) {
+        prev.addEventListener('click', function () { slide(-1); });
+        next.addEventListener('click', function () { slide(1); });
+    }
     list.addEventListener('scroll', updateArrows, { passive: true });
     window.addEventListener('resize', updateArrows);
     window.addEventListener('load', updateArrows);
