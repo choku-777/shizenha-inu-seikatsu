@@ -106,6 +106,8 @@ file that was distributed with this source code.
                     <br /><br /><strong>{{ 'front.shopping.order_no'|trans }} : {{ Order.orderNo }}</strong>
                 {% endif %}
             </p>
+            {# 銀行振込のときだけ振込先を案内する #}
+            {{ include('Shopping/bank_transfer_info.twig', {'bank_format': 'page'}) }}
             {% if Order.complete_message is not empty %}
                 {{ Order.complete_message|raw|purify }}
             {% endif %}

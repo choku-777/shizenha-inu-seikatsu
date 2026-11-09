@@ -1,0 +1,62 @@
+{#
+    銀行振込の振込先の案内（注文受付メール・注文完了ページで共通）
+    銀行振込（dtb_payment.id = 3）で注文されたときだけ表示する。振込先・期限を変えるときはここだけ直す。
+    渡す値:
+      Order       受注
+      bank_format 'text'（テキストメール） | 'html'（HTMLメール） | 'page'（注文完了ページ）
+#}
+{% set bank_payment_id = 3 %}
+{% if Order.Payment and Order.Payment.id == bank_payment_id %}
+{% set bank_deadline = (Order.order_date ?? 'now')|date_modify('+5 days')|date('Y年n月j日') %}
+{% set bank_lines = [
+    '銀行名：PayPay銀行（0033）',
+    '支店名：ビジネス営業部（005）',
+    '口座種別：普通',
+    '口座番号：7021618',
+    '口座名義：タイリクツウショウ（カ',
+] %}
+{% set bank_notes = [
+    'お振込期限：' ~ bank_deadline ~ '（ご注文日から5日以内）',
+    'ご注文者様のお名前でお振込みください。',
+    '振込手数料はお客様のご負担となります。',
+    'ご入金を確認でき次第、商品を発送いたします。',
+    'お振込期限を過ぎてもご入金が確認できない場合は、ご注文をキャンセルとさせていただくことがあります。',
+] %}
+{% if bank_format == 'text' %}
+
+************************************************
+　お振込先
+************************************************
+
+{% for line in bank_lines %}{{ line }}
+{% endfor %}
+お振込金額：{{ Order.payment_total|price }}
+
+{% for note in bank_notes %}※{{ note }}
+{% endfor %}
+{% elseif bank_format == 'html' %}
+<br/>
+<hr style="border-top: 3px double #8c8b8b;">
+　お振込先<br/>
+<hr style="border-top: 3px double #8c8b8b;">
+{% for line in bank_lines %}{{ line }}<br/>
+{% endfor %}
+お振込金額：{{ Order.payment_total|price }}<br/>
+<br/>
+{% for note in bank_notes %}※{{ note }}<br/>
+{% endfor %}
+<br/>
+{% else %}
+<div class="bank-transfer-info" style="max-width: 560px; margin: 24px auto 0; padding: 20px 24px; border: 2px solid #E8DCC8; border-radius: 12px; background: #FFFBF2; text-align: left; line-height: 1.9;">
+    <p style="margin: 0 0 8px; font-weight: 700; font-size: 1.05em;">お振込先</p>
+    <p style="margin: 0 0 12px;">
+        {% for line in bank_lines %}{{ line }}<br>{% endfor %}
+        <strong>お振込金額：{{ Order.payment_total|price }}</strong>
+    </p>
+    <ul style="margin: 0; padding-left: 1.2em; font-size: 0.9em;">
+        {% for note in bank_notes %}<li>{{ note }}</li>{% endfor %}
+    </ul>
+    <p style="margin: 12px 0 0; font-size: 0.9em;">振込先は、ご注文確認メールにも記載しています。</p>
+</div>
+{% endif %}
+{% endif %}
